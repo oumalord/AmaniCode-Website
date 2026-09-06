@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #050810;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--navy);
+  color: #e7ebf3;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(47, 111, 238, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 111, 238, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.glow {
+  background: radial-gradient(circle at 50% 0%, rgba(47, 111, 238, 0.35), transparent 60%);
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+.brand-logo {
+  width: clamp(3.25rem, 7vw, 4.75rem);
+  height: 3.75rem;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 12px rgba(14, 165, 233, 0.4));
+  transform: scale(1.08);
+  transform-origin: left center;
+}
+
+.team-gallery {
+  background: linear-gradient(135deg, #08314a 0%, #075b78 52%, #0b3c67 100%);
+  box-shadow: 0 22px 48px rgba(2, 30, 46, 0.45);
+}
+
+.team-portrait {
+  width: min(100%, 9.5rem);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  object-fit: cover;
+  background: #0b607b;
+  box-shadow: 0 12px 22px rgba(0, 18, 30, 0.35);
+}
+
+.team-portrait-empty {
+  display: grid;
+  place-items: center;
+  color: #9fe8ff;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fadeUp 0.7s ease both; }
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: floatSlow 6s ease-in-out infinite; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: #1c2740; border-radius: 8px; }

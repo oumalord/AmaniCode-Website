@@ -1,0 +1,48 @@
+# Tests
+
+## Test 1 - Submit a contact enquiry and view it in the admin dashboard [sanity]
+Viewport: desktop
+Covers: contact form submission, POST /api/leads, admin GET /api/leads with valid access key, cross-workflow persistence
+Description: Verifies a visitor can submit a business enquiry and that it becomes visible to an admin with the correct access key.
+
+Steps:
+1. Scroll to the contact section and fill in Full name "Amina Otieno", Email "amina@otieno-traders.co.ke", select "I want a demo" from the enquiry dropdown, and enter the message "Please contact me about a demo of your POS system."
+2. Click "Send Enquiry"
+3. Navigate to the admin dashboard via the "Admin" link in the footer
+4. Enter the access key "amanicode-admin-2026" and click "Unlock"
+
+Expected: After step 2, a confirmation message "Thank you — your enquiry has been received." is shown. After step 4, the leads table shows a row for "Amina Otieno" with interest "I want a demo".
+
+## Test 2 - Reject a contact submission missing required fields
+Viewport: desktop
+Covers: client-side required-field validation, invalid-write guardrail
+Description: Verifies the contact form blocks submission when required fields are missing and does not show a success confirmation.
+
+Steps:
+1. Scroll to the contact section
+2. Leave the Full name and Email fields empty, enter "Just checking in" into the message field
+3. Click "Send Enquiry"
+
+Expected: A validation message "Please fill in your name, email and message." is shown and the success confirmation "Thank you — your enquiry has been received." is not shown.
+
+## Test 3 - Admin dashboard rejects an incorrect access key
+Viewport: desktop
+Covers: admin authorization boundary, GET /api/leads 401 handling
+Description: Verifies the admin leads dashboard is not accessible with an incorrect access key.
+
+Steps:
+1. Navigate to the admin dashboard via the "Admin" link in the footer
+2. Enter the access key "wrong-key-123" and click "Unlock"
+
+Expected: An error message "Invalid access key." is shown and the leads table is not displayed.
+
+## Test 4 - Mobile navigation menu opens and links to the contact section
+Viewport: mobile
+Covers: responsive navbar, mobile menu open/close interaction
+Description: Verifies the mobile hamburger menu opens, shows navigation links, and tapping a link closes the menu and reveals the target section.
+
+Steps:
+1. Tap the mobile menu (hamburger) icon in the navbar
+2. Tap "Contact" in the opened mobile menu
+
+Expected: The mobile menu closes and the contact section heading "Let's build something that moves your business forward." is visible on the page.
