@@ -88,8 +88,6 @@ export const problems: string[] = [
 
 export const trustBadges: string[] = ['M-Pesa Ready', 'Mobile First', 'Cloud Based', 'Multi-Branch', 'Secure', 'Scalable', 'Real-Time Analytics', 'WhatsApp Ready'];
 
-export const teamRoles: string[] = ['Founder & CEO', 'Lead Developer', 'Product Designer', 'Business Development', 'Customer Success'];
-
 export interface PricingPlan { name: string; desc: string; }
 export const pricingPlans: PricingPlan[] = [
   { name: 'Starter', desc: 'For small businesses getting started with digital tools.' },

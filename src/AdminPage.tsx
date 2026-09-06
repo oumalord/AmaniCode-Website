@@ -20,14 +20,6 @@ interface Lead {
 }
 
 const STATUSES = ['New', 'Contacted', 'Qualified', 'Demo Scheduled', 'Proposal Sent', 'Won', 'Lost'];
-const TEAM_ASSETS = [
-  { key: 'founder-ceo', label: 'Founder & CEO' },
-  { key: 'lead-developer', label: 'Lead Developer' },
-  { key: 'product-designer', label: 'Product Designer' },
-  { key: 'business-development', label: 'Business Development' },
-  { key: 'customer-success', label: 'Customer Success' },
-];
-
 function readImage(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -103,8 +95,8 @@ export default function AdminPage() {
     try {
       await api.put('/api/site-assets/' + assetKey + '?key=' + encodeURIComponent(unlockedKey), { dataUrl });
       setAssets((current) => ({ ...current, [assetKey]: dataUrl }));
-    } catch {
-      setError('Could not save the image. Use a PNG, JPEG, WebP, or GIF under 750 KB.');
+    } catch (requestError) {
+      setError(requestError instanceof Error ? requestError.message : 'Could not save the logo.');
     } finally {
       setSavingAsset('');
     }
@@ -237,23 +229,19 @@ export default function AdminPage() {
           </div>
         ) : activeView === 'assets' ? (
           <div>
-            <p className="mb-6 text-sm text-slate-400">Upload a logo and team photos. Images appear on the public website immediately after saving.</p>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {[{ key: 'logo', label: 'Company Logo' }, ...TEAM_ASSETS].map((asset) => (
-                <div key={asset.key} className="rounded-xl border border-white/10 bg-white/5 p-4">
-                  <div className="aspect-square overflow-hidden rounded-lg bg-[#080c17] flex items-center justify-center">
-                    {assets[asset.key] ? <img src={assets[asset.key]} alt={asset.label} className="h-full w-full object-cover" /> : <ImagePlus className="h-7 w-7 text-slate-600" />}
-                  </div>
-                  <p className="mt-3 text-sm font-medium text-white">{asset.label}</p>
-                  <div className="mt-3 flex items-center gap-2">
-                    <label className="cursor-pointer rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-500">
-                      {savingAsset === asset.key ? 'Saving...' : 'Upload'}
-                      <input type="file" accept="image/png,image/jpeg,image/webp,image/gif" className="sr-only" disabled={savingAsset === asset.key} onChange={(e) => uploadAsset(asset.key, e.target.files?.[0])} />
-                    </label>
-                    {assets[asset.key] && <button onClick={() => saveAsset(asset.key, '')} disabled={savingAsset === asset.key} className="rounded-lg border border-white/10 p-2 text-slate-400 hover:text-red-400" aria-label={'Remove ' + asset.label}><Trash2 className="h-4 w-4" /></button>}
-                  </div>
-                </div>
-              ))}
+            <p className="mb-6 text-sm text-slate-400">Upload your company logo. It appears in the public website navigation immediately after saving.</p>
+            <div className="max-w-sm rounded-xl border border-white/10 bg-white/5 p-4">
+              <div className="aspect-square overflow-hidden rounded-lg bg-[#080c17] flex items-center justify-center">
+                {assets.logo ? <img src={assets.logo} alt="Company Logo" className="h-full w-full object-contain" /> : <ImagePlus className="h-7 w-7 text-slate-600" />}
+              </div>
+              <p className="mt-3 text-sm font-medium text-white">Company Logo</p>
+              <div className="mt-3 flex items-center gap-2">
+                <label className="cursor-pointer rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-500">
+                  {savingAsset === 'logo' ? 'Saving...' : 'Upload Logo'}
+                  <input type="file" accept="image/png,image/jpeg,image/webp,image/gif" className="sr-only" disabled={savingAsset === 'logo'} onChange={(e) => uploadAsset('logo', e.target.files?.[0])} />
+                </label>
+                {assets.logo && <button onClick={() => saveAsset('logo', '')} disabled={savingAsset === 'logo'} className="rounded-lg border border-white/10 p-2 text-slate-400 hover:text-red-400" aria-label="Remove company logo"><Trash2 className="h-4 w-4" /></button>}
+              </div>
             </div>
           </div>
         ) : <div className="overflow-x-auto rounded-2xl border border-white/10">

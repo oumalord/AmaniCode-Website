@@ -8,7 +8,7 @@ import {
 import AdminPage from './AdminPage';
 import AnimatedBackground from './components/AnimatedBackground';
 import {
-  solutions, products, industries, processSteps, whyCards, problems, trustBadges, teamRoles,
+  solutions, products, industries, processSteps, whyCards, problems, trustBadges,
   pricingPlans, enquiryOptions, CONTACT_EMAIL, CONTACT_PHONE,
   defaultSiteSettings, type ProductOS, type SiteSettings,
 } from './data';
@@ -396,11 +396,11 @@ function ProcessSection() {
   );
 }
 
-function AboutSection({ assets }: { assets: Record<string, string> }) {
+function AboutSection() {
   const values = ['Innovation', 'Integrity', 'Simplicity', 'Impact', 'Customer Success', 'African Excellence'];
   return (
     <section id="about" className="py-24 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14">
+      <div className="max-w-4xl mx-auto px-5 sm:px-8">
         <div>
           <SectionHeading eyebrow="About AmaniCode" title="We build technology with purpose." sub="AmaniCode Solutions is a Kenyan technology company focused on building practical digital solutions for businesses and organizations. Our mission is to make powerful technology accessible to businesses across Africa." />
           <div className="mt-8 space-y-4">
@@ -415,19 +415,6 @@ function AboutSection({ assets }: { assets: Record<string, string> }) {
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
             {values.map((v) => <span key={v} className="text-xs rounded-full border border-white/10 px-3 py-1.5 text-slate-300">{v}</span>)}
-          </div>
-        </div>
-        <div>
-          <p className="text-xs uppercase tracking-widest text-blue-400 mb-4">Team</p>
-          <div className="team-gallery grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 p-5 sm:p-7">
-            {teamRoles.map((r) => (
-              <div key={r} className="min-w-0 text-center">
-                {assets[r.toLowerCase().replace(/[^a-z]+/g, '-').replace(/-$/, '')] ? (
-                  <img src={assets[r.toLowerCase().replace(/[^a-z]+/g, '-').replace(/-$/, '')]} alt={r} className="team-portrait" />
-                ) : <div className="team-portrait team-portrait-empty"><Users className="h-7 w-7" /></div>}
-                <p className="mt-3 text-sm font-medium text-white">{r}</p>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -622,7 +609,7 @@ function LandingPage({ page }: { page: string }) {
         {page === 'products' && <><ProductsSection projects={settings.projects} /><PricingSection /></>}
         {page === 'industries' && <IndustriesSection />}
         {page === 'why' && <><WhySection /><VisionSection /></>}
-        {page === 'about' && <><AboutSection assets={assets} /><ProcessSection /></>}
+        {page === 'about' && <><AboutSection /><ProcessSection /></>}
         {page === 'resources' && <ResourcesSection />}
         {page === 'contact' && <ContactSection whatsappNumber={settings.whatsappNumber} />}
         <Footer />

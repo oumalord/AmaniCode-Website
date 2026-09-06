@@ -5,7 +5,7 @@ import { neon } from '@neondatabase/serverless';
 const port = Number(process.env.PORT || 3002);
 const adminKey = process.env.ADMIN_KEY;
 const databaseUrl = process.env.DATABASE_URL;
-const assetKeys = new Set(['logo', 'founder-ceo', 'lead-developer', 'product-designer', 'business-development', 'customer-success']);
+const assetKeys = new Set(['logo']);
 const imageDataUrl = /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/;
 
 if (!databaseUrl || !adminKey) {
