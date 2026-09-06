@@ -109,7 +109,9 @@ export default function AdminPage() {
       return;
     }
     try {
-      await saveAsset(assetKey, await readImage(file));
+      const dataUrl = await readImage(file);
+      setAssets((current) => ({ ...current, [assetKey]: dataUrl }));
+      await saveAsset(assetKey, dataUrl);
     } catch {
       setError('Could not read that image.');
     }
