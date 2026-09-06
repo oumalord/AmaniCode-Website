@@ -93,7 +93,7 @@ export default function AdminPage() {
     setSavingAsset(assetKey);
     setError('');
     try {
-      await api.put('/api/site-assets/' + assetKey + '?key=' + encodeURIComponent(unlockedKey), { dataUrl });
+      await api.put('/api/site-assets?key=' + encodeURIComponent(unlockedKey), { key: assetKey, dataUrl });
       setAssets((current) => ({ ...current, [assetKey]: dataUrl }));
     } catch (requestError) {
       setError(requestError instanceof Error ? requestError.message : 'Could not save the logo.');

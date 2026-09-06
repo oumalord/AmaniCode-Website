@@ -47,10 +47,9 @@ export default async function handler(request, response) {
       }, {});
       return response.status(200).json({ assets });
     }
-    if (request.method === 'PUT' && path.startsWith('/api/site-assets/')) {
+    if (request.method === 'PUT' && path === '/api/site-assets') {
       if (!isAdmin(request, adminKey)) return response.status(401).json({ error: 'Unauthorized' });
-      const key = path.split('/').pop();
-      const { dataUrl = '' } = request.body || {};
+      const { key, dataUrl = '' } = request.body || {};
       if (!assetKeys.has(key)) return response.status(400).json({ error: 'Unknown asset.' });
       if (dataUrl && (!imageDataUrl.test(dataUrl) || dataUrl.length > 1_000_000)) return response.status(400).json({ error: 'Use a supported image under 750 KB.' });
       await saveRecord(sql, 'site-assets', key, { key, dataUrl });

@@ -62,10 +62,9 @@ const server = createServer(async (request, response) => {
       }, {});
       return send(response, 200, { assets });
     }
-    if (request.method === 'PUT' && path.startsWith('/api/site-assets/')) {
+    if (request.method === 'PUT' && path === '/api/site-assets') {
       if (!isAdmin(requestUrl, request)) return send(response, 401, { error: 'Unauthorized' });
-      const key = path.split('/').pop();
-      const { dataUrl = '' } = await readBody(request);
+      const { key, dataUrl = '' } = await readBody(request);
       if (!assetKeys.has(key)) return send(response, 400, { error: 'Unknown asset.' });
       if (dataUrl && (!imageDataUrl.test(dataUrl) || dataUrl.length > 1_000_000)) return send(response, 400, { error: 'Use a supported image under 750 KB.' });
       await saveRecord('site-assets', key, { key, dataUrl });
