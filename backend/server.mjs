@@ -8,7 +8,10 @@ const databaseUrl = process.env.DATABASE_URL;
 const assetKeys = new Set(['logo', 'founder-ceo', 'lead-developer', 'product-designer', 'business-development', 'customer-success']);
 const imageDataUrl = /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/;
 
-if (!databaseUrl || !adminKey) throw new Error('DATABASE_URL and ADMIN_KEY are required. Add them to .env before starting the API server.');
+if (!databaseUrl || !adminKey) {
+  const missing = [!databaseUrl && 'DATABASE_URL', !adminKey && 'ADMIN_KEY'].filter(Boolean).join(' and ');
+  throw new Error(`${missing} is required. Add it to amanicode-source/.env before starting the API server.`);
+}
 const sql = neon(databaseUrl);
 
 async function ensureSchema() {
