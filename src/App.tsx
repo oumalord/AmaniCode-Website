@@ -55,10 +55,10 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
   ];
   return (
     <header className={'fixed top-0 inset-x-0 z-50 transition-all ' + (scrolled ? 'bg-[#050810]/90 backdrop-blur-md border-b border-white/10' : 'bg-transparent')}>
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-8 py-3">
-        <a href="#home" className="flex items-center gap-3 font-semibold text-white text-xl tracking-tight">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-8 py-2">
+        <a href="#/home" className="flex items-center gap-3 font-semibold text-white text-xl tracking-tight" aria-label="AmaniCode Solutions home">
           {logoUrl && <img src={logoUrl} alt="AmaniCode Solutions" className="brand-logo" />}
-          AmaniCode <span className="text-blue-400 font-normal hidden sm:inline">Solutions</span>
+          {!logoUrl && <>AmaniCode <span className="text-blue-400 font-normal hidden sm:inline">Solutions</span></>}
         </a>
         <div className="hidden lg:flex items-center gap-7 text-sm text-slate-300">
           {links.map(([label, href]) => (
