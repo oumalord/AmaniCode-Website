@@ -16,12 +16,11 @@ export const solutions: Solution[] = [
 
 export interface ProductOS { id: string; name: string; forWho: string[]; features: string[]; link?: string; }
 export const products: ProductOS[] = [
-  { id: 'safigroom', name: 'SafiGroom OS', forWho: ['Salons', 'Barbers', 'Spas', 'Beauty businesses'], features: ['POS', 'Appointments', 'Staff', 'Commissions', 'Inventory', 'Customers', 'M-Pesa', 'Reports'] },
-  { id: 'amanitech', name: 'AmaniTech OS', forWho: ['Electronics', 'Phones', 'Laptops', 'Computer shops', 'Camera stores'], features: ['POS', 'IMEI tracking', 'Serial numbers', 'Repairs', 'Warranty', 'Inventory', 'M-Pesa', 'E-commerce'] },
-  { id: 'amanifashion', name: 'AmaniFashion OS', forWho: ['Boutiques', 'Fashion stores', 'Clothing businesses', 'Shoe stores'], features: ['POS', 'Size/colour inventory', 'Customers', 'Loyalty', 'E-commerce', 'Orders', 'Marketing'] },
-  { id: 'amanihome', name: 'AmaniHome OS', forWho: ['Kitchenware', 'Household products', 'Home decor', 'Appliances', 'General home retailers'], features: ['POS', 'Inventory', 'Wholesale', 'E-commerce', 'Delivery', 'Customers', 'Reports'] },
-  { id: 'amanilens', name: 'AmaniLens OS', forWho: ['Camera stores', 'Photography businesses', 'Videography companies', 'Equipment rental businesses'], features: ['Equipment inventory', 'Serial numbers', 'Rentals', 'Bookings', 'Deposits', 'Repairs', 'POS', 'E-commerce'] },
-  { id: 'amaniretail', name: 'AmaniRetail OS', forWho: ['General retail businesses'], features: ['POS', 'Inventory', 'Customers', 'Suppliers', 'Expenses', 'Staff', 'Reports', 'M-Pesa', 'Online store'] },
+  { id: 'malariawatch', name: 'Malaria Watch', forWho: ['Healthcare teams', 'Researchers', 'Communities'], features: ['Monitoring', 'Reporting', 'Data insights'], link: 'https://malariawatch.vercel.app' },
+  { id: 'kgga', name: 'Kenya Girl Guides Association LMS', forWho: ['Schools', 'Trainers', 'Girl Guides'], features: ['Learning', 'Courses', 'Progress tracking'], link: 'https://kggalms.vercel.app' },
+  { id: 'safigroom', name: 'SafiGroom OS', forWho: ['Salons', 'Barbers', 'Spas', 'Beauty businesses'], features: ['POS', 'Appointments', 'Staff', 'Commissions'], link: 'https://braidysms.vercel.app' },
+  { id: 'amanitech', name: 'Electronics Shop System', forWho: ['Electronics shops', 'Phone retailers', 'Computer shops'], features: ['POS', 'Inventory', 'Repairs', 'Warranty'], link: 'https://star-electronics-africa.vercel.app/#/login' },
+  { id: 'digishield', name: 'Digishield', forWho: ['Businesses', 'Organisations', 'Digital teams'], features: ['Security', 'Digital protection', 'Business tools'], link: 'https://digishield.co.ke' },
 ];
 
 export interface SiteSettings {
@@ -32,7 +31,7 @@ export interface SiteSettings {
 
 export const defaultSiteSettings: SiteSettings = {
   whatsappNumber: '+254746542433',
-  projects: products.map((product) => ({ ...product, link: '#/contact' })),
+  projects: products.map((product) => ({ ...product })),
   solutions: solutions.map((solution) => ({ ...solution, link: '#/contact' })),
 };
 

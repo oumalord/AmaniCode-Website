@@ -224,7 +224,7 @@ function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
                     <span key={f} className="text-[11px] rounded-full border border-white/10 px-2 py-1 text-slate-400">{f}</span>
                   ))}
                 </div>
-                <a href={p.link || '#/contact'} className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300">
+                <a href={p.link || '#/contact'} target={p.link?.startsWith('http') ? '_blank' : undefined} rel={p.link?.startsWith('http') ? 'noopener noreferrer' : undefined} className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300">
                   Explore {p.name.split(' ')[0]} <ChevronRight className="h-4 w-4" />
                 </a>
               </div>
