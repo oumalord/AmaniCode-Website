@@ -25,11 +25,13 @@ function SectionHeading({ eyebrow, title, sub }: { eyebrow: string; title: strin
 
 function Navbar({ logoUrl }: { logoUrl?: string }) {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [activeHref, setActiveHref] = useState(window.location.hash || '#/home');
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const onHashChange = () => setActiveHref(window.location.hash || '#/home');
+    window.addEventListener('hashchange', onHashChange);
+    return () => {
+      window.removeEventListener('hashchange', onHashChange);
+    };
   }, []);
   const links: [string, string][] = [
     ['Home', '#/home'], ['Solutions', '#/solutions'], ['Products', '#/products'], ['Pricing', '#/pricing'],
@@ -37,15 +39,15 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
     ['Resources', '#/resources'], ['Contact', '#/contact'],
   ];
   return (
-    <header className={'fixed top-0 inset-x-0 z-50 transition-all ' + (scrolled ? 'bg-[#071a3d]/90 backdrop-blur-md border-b border-white/10' : 'bg-transparent')}>
+    <header className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-sm">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-8 py-2">
-        <a href="#/home" className="flex items-center gap-3 font-semibold text-white text-xl tracking-tight" aria-label="AmaniCode Solutions home">
+        <a href="#/home" className="flex items-center gap-3 font-semibold text-[#071a3d] text-xl tracking-tight" aria-label="AmaniCode Solutions home">
           {logoUrl && <img src={logoUrl} alt="AmaniCode Solutions" className="brand-logo" />}
           {!logoUrl && <>AmaniCode <span className="text-blue-400 font-normal hidden sm:inline">Solutions</span></>}
         </a>
-        <div className="hidden lg:flex items-center gap-7 text-sm text-slate-300">
+        <div className="hidden lg:flex items-center gap-1 text-sm font-semibold text-[#071a3d]">
           {links.map(([label, href]) => (
-            <a key={href} href={href} className="hover:text-white transition-colors">{label}</a>
+            <a key={href} href={href} className={'rounded-lg px-3 py-2 transition-colors ' + (activeHref === href ? 'bg-yellow-400 text-[#071a3d]' : 'hover:bg-blue-50 hover:text-blue-700')}>{label}</a>
           ))}
         </div>
         <div className="hidden lg:block">
@@ -53,14 +55,14 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
             Book a Demo <ArrowRight className="h-4 w-4" />
           </a>
         </div>
-        <button onClick={() => setOpen(!open)} className="lg:hidden text-white" aria-label="Toggle menu">
+        <button onClick={() => setOpen(!open)} className="lg:hidden text-[#071a3d]" aria-label="Toggle menu">
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </nav>
       {open && (
-        <div className="lg:hidden bg-[#071a3d] border-t border-white/10 px-5 py-4 flex flex-col gap-4">
+        <div className="lg:hidden bg-white border-t border-blue-100 px-5 py-4 flex flex-col gap-2 shadow-lg">
           {links.map(([label, href]) => (
-            <a key={href} href={href} onClick={() => setOpen(false)} className="text-slate-300 hover:text-white text-sm">{label}</a>
+            <a key={href} href={href} onClick={() => setOpen(false)} className={'rounded-lg px-3 py-2 text-sm font-semibold ' + (activeHref === href ? 'bg-yellow-400 text-[#071a3d]' : 'text-[#071a3d] hover:bg-blue-50')}>{label}</a>
           ))}
           <a href="#/contact" onClick={() => setOpen(false)} className="rounded-full bg-yellow-400 hover:bg-yellow-300 text-center px-5 py-2.5 text-sm font-semibold text-[#071a3d]">Book a Demo</a>
         </div>
@@ -172,13 +174,13 @@ function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
           {projects.map((p) => {
             const Icon = productIcons[p.id] || Package;
             return (
-              <a key={p.id} href={p.link || '#/contact'} target={p.link?.startsWith('http') ? '_blank' : undefined} rel={p.link?.startsWith('http') ? 'noopener noreferrer' : undefined} className="group rounded-2xl border border-white/10 bg-[#0b2f6b] p-6 flex flex-col hover:border-yellow-400/60 hover:bg-[#1557b0] transition-colors">
-                <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-700/10 flex items-center justify-center text-blue-400">
+              <a key={p.id} href={p.link || '#/contact'} target={p.link?.startsWith('http') ? '_blank' : undefined} rel={p.link?.startsWith('http') ? 'noopener noreferrer' : undefined} className="group rounded-2xl border border-blue-100 bg-white p-6 flex flex-col shadow-sm hover:border-yellow-400 hover:shadow-md transition-all">
+                <div className="h-11 w-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-700">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-white">{p.name}</h3>
-                <div className="mt-4 h-36 overflow-hidden rounded-xl border border-white/10 bg-[#071a3d] pointer-events-none">
-                  <iframe src={p.link} title={p.name + ' dashboard preview'} loading="lazy" className="h-[620px] w-full origin-top scale-[0.42]" />
+                <h3 className="mt-4 text-lg font-semibold text-[#071a3d]">{p.name}</h3>
+                <div className="dashboard-preview mt-4 overflow-hidden rounded-xl border border-blue-100 bg-blue-50 pointer-events-none">
+                  <iframe src={p.link} title={p.name + ' dashboard preview'} loading="lazy" />
                 </div>
                 <p className="mt-1 text-xs text-slate-500">{p.forWho.join(' \u2022 ')}</p>
                 <div className="mt-4 flex flex-wrap gap-1.5">
