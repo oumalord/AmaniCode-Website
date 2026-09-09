@@ -18,7 +18,7 @@ export interface ProductOS { id: string; name: string; forWho: string[]; feature
 export const products: ProductOS[] = [
   { id: 'malariawatch', name: 'Malaria Watch', forWho: ['Healthcare teams', 'Researchers', 'Communities'], features: ['Monitoring', 'Reporting', 'Data insights'], link: 'https://malariawatch.vercel.app' },
   { id: 'kgga', name: 'Kenya Girl Guides Association LMS', forWho: ['Schools', 'Trainers', 'Girl Guides'], features: ['Learning', 'Courses', 'Progress tracking'], link: 'https://kggalms.vercel.app' },
-  { id: 'safigroom', name: 'SafiGroom OS', forWho: ['Salons', 'Barbers', 'Spas', 'Beauty businesses'], features: ['POS', 'Appointments', 'Staff', 'Commissions'], link: 'https://braidysms.vercel.app' },
+  { id: 'safigroom', name: 'Braidys', forWho: ['Salons', 'Barbers', 'Spas', 'Beauty businesses'], features: ['POS', 'Appointments', 'Staff', 'Commissions'], link: 'https://braidysms.vercel.app' },
   { id: 'amanitech', name: 'Star Electronics shop POS', forWho: ['Electronics shops', 'Phone retailers', 'Computer shops'], features: ['POS', 'Inventory', 'Repairs', 'Warranty'], link: 'https://star-electronics-africa.vercel.app/#/login' },
   { id: 'digishield', name: 'Digishield', forWho: ['Businesses', 'Organisations', 'Digital teams'], features: ['Security', 'Digital protection', 'Business tools'], link: 'https://digishield.co.ke' },
 ];

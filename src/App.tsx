@@ -3,7 +3,7 @@ import { api } from './api';
 import {
   Menu, X, ArrowRight, ChevronRight, CheckCircle2, Building2, CreditCard, Users, Package,
   ShoppingCart, BarChart3, MessageCircle, Phone, Mail, MapPin, Smartphone,
-  Scissors, Laptop, Globe2, ShieldCheck,
+  Globe2,
 } from 'lucide-react';
 import AdminPage from './AdminPage';
 import AnimatedBackground from './components/AnimatedBackground';
@@ -35,7 +35,7 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
   }, []);
   const links: [string, string][] = [
     ['Home', '#/home'], ['Solutions', '#/solutions'], ['Products', '#/products'], ['Pricing', '#/pricing'],
-    ['Industries', '#/industries'], ['Why AmaniCode', '#/why'], ['About', '#/about'],
+    ['Industries', '#/industries'], ['About', '#/about'],
     ['Resources', '#/resources'], ['Contact', '#/contact'],
   ];
   return (
@@ -136,10 +136,6 @@ function ProblemSection() {
   );
 }
 
-const productIcons: Record<string, typeof Package> = {
-  safigroom: Scissors, amanitech: Laptop, malariawatch: Globe2, kgga: Building2, digishield: ShieldCheck,
-};
-
 const solutionIcons = [Building2, CreditCard, Users, Package, ShoppingCart, BarChart3, Package, Smartphone];
 
 function SolutionsSection({ items = solutions }: { items?: typeof solutions }) {
@@ -172,13 +168,9 @@ function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
         <SectionHeading eyebrow="Products" title="Our existing digital systems." sub="Each product below is a live AmaniCode project. Select any dashboard to open it in a new tab, then return here whenever you are ready." />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p) => {
-            const Icon = productIcons[p.id] || Package;
             return (
               <a key={p.id} href={p.link || '#/contact'} target={p.link?.startsWith('http') ? '_blank' : undefined} rel={p.link?.startsWith('http') ? 'noopener noreferrer' : undefined} className="group rounded-2xl border border-blue-100 bg-white p-6 flex flex-col shadow-sm hover:border-yellow-400 hover:shadow-md transition-all">
-                <div className="h-11 w-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-700">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-[#071a3d]">{p.name}</h3>
+                <h3 className="text-lg font-semibold text-[#071a3d]">{p.name}</h3>
                 <div className="dashboard-preview mt-4 overflow-hidden rounded-xl border border-blue-100 bg-blue-50 pointer-events-none">
                   <iframe src={p.link} title={p.name + ' dashboard preview'} loading="lazy" />
                 </div>
@@ -188,7 +180,7 @@ function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
                     <span key={f} className="text-[11px] rounded-full border border-white/10 px-2 py-1 text-slate-400">{f}</span>
                   ))}
                 </div>
-                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-yellow-300 group-hover:text-yellow-200">Open dashboard <ChevronRight className="h-4 w-4" /></span>
+                <span className="mt-6 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-blue-700 px-4 py-3 text-sm font-semibold text-white group-hover:bg-blue-900">Open dashboard <ChevronRight className="h-4 w-4" /></span>
               </a>
             );
           })}
@@ -471,7 +463,7 @@ function Footer() {
     { title: 'Solutions', items: products.map((p) => p.name) },
     { title: 'Products', items: products.map((p) => p.name) },
     { title: 'Industries', items: industries.slice(0, 6).map((i) => i.name) },
-    { title: 'Company', items: ['About', 'Why AmaniCode', 'Careers', 'Contact'] },
+    { title: 'Company', items: ['About', 'Careers', 'Contact'] },
   ];
   return (
     <footer className="border-t border-white/5 pt-16 pb-8">
@@ -529,7 +521,7 @@ function LandingPage({ page }: { page: string }) {
       setSettings((current) => ({
         ...current,
         ...res.data.settings,
-        projects: products.map((product) => ({ ...product, ...savedProjects.find((saved: ProductOS) => saved.id === product.id) })),
+        projects: products.map((product) => ({ ...product, ...savedProjects.find((saved: ProductOS) => saved.id === product.id), name: product.name, link: product.link })),
         solutions: res.data.settings.solutions || current.solutions,
       }));
     }).catch(() => undefined);
