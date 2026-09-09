@@ -149,7 +149,7 @@ export default function AdminPage() {
 
   if (!unlockedKey) {
     return (
-      <div className="min-h-screen bg-[#050810] flex items-center justify-center px-5">
+      <div className="min-h-screen bg-[#071a3d] flex items-center justify-center px-5">
         <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/5 p-8">
           <div className="h-11 w-11 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400"><Lock className="h-5 w-5" /></div>
           <h1 className="mt-4 text-lg font-semibold text-white">AmaniCode Admin</h1>
@@ -174,7 +174,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#050810] px-5 sm:px-8 py-10">
+    <div className="min-h-screen bg-[#071a3d] px-5 sm:px-8 py-10">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

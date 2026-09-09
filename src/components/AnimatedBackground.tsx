@@ -46,7 +46,7 @@ export default function AnimatedBackground() {
 
     function tick() {
       if (!ctx || !canvas) return;
-      ctx.fillStyle = '#050810';
+      ctx.fillStyle = '#071a3d';
       ctx.fillRect(0, 0, width, height);
 
       for (const n of nodes) {

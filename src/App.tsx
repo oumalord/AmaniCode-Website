@@ -54,7 +54,7 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
     ['Resources', '#/resources'], ['Contact', '#/contact'],
   ];
   return (
-    <header className={'fixed top-0 inset-x-0 z-50 transition-all ' + (scrolled ? 'bg-[#050810]/90 backdrop-blur-md border-b border-white/10' : 'bg-transparent')}>
+    <header className={'fixed top-0 inset-x-0 z-50 transition-all ' + (scrolled ? 'bg-[#071a3d]/90 backdrop-blur-md border-b border-white/10' : 'bg-transparent')}>
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-8 py-2">
         <a href="#/home" className="flex items-center gap-3 font-semibold text-white text-xl tracking-tight" aria-label="AmaniCode Solutions home">
           {logoUrl && <img src={logoUrl} alt="AmaniCode Solutions" className="brand-logo" />}
@@ -66,7 +66,7 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
           ))}
         </div>
         <div className="hidden lg:block">
-          <a href="#/contact" className="inline-flex items-center gap-1.5 rounded-full bg-blue-600 hover:bg-blue-500 transition-colors px-5 py-2.5 text-sm font-medium text-white">
+          <a href="#/contact" className="inline-flex items-center gap-1.5 rounded-full bg-yellow-400 hover:bg-yellow-300 transition-colors px-5 py-2.5 text-sm font-semibold text-[#071a3d]">
             Book a Demo <ArrowRight className="h-4 w-4" />
           </a>
         </div>
@@ -75,11 +75,11 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
         </button>
       </nav>
       {open && (
-        <div className="lg:hidden bg-[#050810] border-t border-white/10 px-5 py-4 flex flex-col gap-4">
+        <div className="lg:hidden bg-[#071a3d] border-t border-white/10 px-5 py-4 flex flex-col gap-4">
           {links.map(([label, href]) => (
             <a key={href} href={href} onClick={() => setOpen(false)} className="text-slate-300 hover:text-white text-sm">{label}</a>
           ))}
-          <a href="#/contact" onClick={() => setOpen(false)} className="rounded-full bg-blue-600 text-center px-5 py-2.5 text-sm font-medium text-white">Book a Demo</a>
+          <a href="#/contact" onClick={() => setOpen(false)} className="rounded-full bg-yellow-400 hover:bg-yellow-300 text-center px-5 py-2.5 text-sm font-semibold text-[#071a3d]">Book a Demo</a>
         </div>
       )}
     </header>
@@ -109,7 +109,7 @@ function Hero() {
             AmaniCode Solutions builds powerful business software that helps organizations manage operations, serve customers, increase efficiency and grow with confidence.
           </p>
           <div className="mt-9 flex flex-wrap gap-4 animate-fade-up">
-            <a href="#/solutions" className="rounded-full bg-white text-[#050810] px-6 py-3 text-sm font-semibold hover:bg-slate-200 transition-colors">Explore Solutions</a>
+            <a href="#/solutions" className="rounded-full bg-yellow-400 text-[#071a3d] px-6 py-3 text-sm font-semibold hover:bg-yellow-300 transition-colors">Explore Solutions</a>
             <a href="#/contact" className="rounded-full border border-white/20 text-white px-6 py-3 text-sm font-semibold hover:border-white/40 transition-colors inline-flex items-center gap-2">Book a Demo <ArrowRight className="h-4 w-4" /></a>
           </div>
           <p className="mt-6 text-xs uppercase tracking-widest text-slate-500">Kenya &bull; Africa &bull; Global</p>
@@ -117,7 +117,7 @@ function Hero() {
 
         <div className="mt-16 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-4 sm:p-6 shadow-2xl shadow-blue-900/20 animate-float">
           <div className="flex items-center gap-2 mb-5">
-            <span className="h-3 w-3 rounded-full bg-red-400/70" /><span className="h-3 w-3 rounded-full bg-yellow-400/70" /><span className="h-3 w-3 rounded-full bg-green-400/70" />
+            <span className="h-3 w-3 rounded-full bg-blue-400/70" /><span className="h-3 w-3 rounded-full bg-yellow-400/70" /><span className="h-3 w-3 rounded-full bg-white/70" />
             <span className="ml-3 text-xs text-slate-500">amanicode-dashboard</span>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -163,7 +163,7 @@ function ProblemSection() {
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {problems.map((p) => (
             <div key={p} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-slate-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-red-400/70 shrink-0" /> {p}
+              <span className="h-1.5 w-1.5 rounded-full bg-yellow-400 shrink-0" /> {p}
             </div>
           ))}
         </div>
@@ -213,7 +213,7 @@ function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
           {projects.map((p) => {
             const Icon = productIcons[p.id] || Package;
             return (
-              <div key={p.id} className="rounded-2xl border border-white/10 bg-[#080c17] p-6 flex flex-col">
+              <div key={p.id} className="rounded-2xl border border-white/10 bg-[#0b2f6b] p-6 flex flex-col">
                 <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-700/10 flex items-center justify-center text-blue-400">
                   <Icon className="h-5 w-5" />
                 </div>
@@ -260,7 +260,7 @@ function IndustriesSection() {
                 <span key={f} className="text-xs rounded-full border border-white/10 px-3 py-1 text-slate-300">{f}</span>
               ))}
             </div>
-            <a href="#contact" className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-blue-600 hover:bg-blue-500 px-5 py-2.5 text-sm font-medium text-white">Request a System <ArrowRight className="h-4 w-4" /></a>
+                <a href="#contact" className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-yellow-400 hover:bg-yellow-300 px-5 py-2.5 text-sm font-semibold text-[#071a3d]">Request a System <ArrowRight className="h-4 w-4" /></a>
           </div>
         </div>
       </div>
@@ -290,7 +290,7 @@ function FeatureShowcase() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-[#080c17] p-6 h-64 flex items-center justify-center text-slate-600 text-sm">
+            <div className="rounded-2xl border border-white/10 bg-[#0b2f6b] p-6 h-64 flex items-center justify-center text-slate-300 text-sm">
               Interface preview
             </div>
           </div>
@@ -363,7 +363,7 @@ function CustomSoftwareSection() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-10 items-center">
         <div>
           <SectionHeading eyebrow="Custom Software" title="If your business doesn't fit standard software, we'll build what does." />
-          <a href="#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-blue-600 hover:bg-blue-500 px-6 py-3 text-sm font-medium text-white">Discuss Your Project <ArrowRight className="h-4 w-4" /></a>
+          <a href="#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-yellow-400 hover:bg-yellow-300 px-6 py-3 text-sm font-semibold text-[#071a3d]">Discuss Your Project <ArrowRight className="h-4 w-4" /></a>
         </div>
         <div className="grid grid-cols-2 gap-3">
           {services.map((s) => (
@@ -501,7 +501,7 @@ function ContactSection({ whatsappNumber = CONTACT_PHONE }: { whatsappNumber?: s
           </div>
           <p className="mt-6 text-xs text-slate-600">Contact details shown are placeholders and should be updated to AmaniCode's real details.</p>
         </div>
-        <form onSubmit={handleSubmit} className="rounded-2xl border border-white/10 bg-[#080c17] p-6 sm:p-8 space-y-4">
+        <form onSubmit={handleSubmit} className="rounded-2xl border border-white/10 bg-[#0b2f6b] p-6 sm:p-8 space-y-4">
           {status === 'success' ? (
             <div className="text-center py-10">
               <CheckCircle2 className="h-10 w-10 text-blue-400 mx-auto" />
@@ -524,12 +524,12 @@ function ContactSection({ whatsappNumber = CONTACT_PHONE }: { whatsappNumber?: s
                 <input className={inputClass} placeholder="Industry" value={form.industry} onChange={(e) => update('industry', e.target.value)} />
               </div>
               <select className={inputClass} value={form.interest} onChange={(e) => update('interest', e.target.value)}>
-                {enquiryOptions.map((o) => <option key={o} value={o} className="bg-[#080c17]">{o}</option>)}
+                {enquiryOptions.map((o) => <option key={o} value={o} className="bg-[#0b2f6b]">{o}</option>)}
               </select>
               <input className={inputClass} placeholder="Budget range (optional)" value={form.budget} onChange={(e) => update('budget', e.target.value)} />
               <textarea className={inputClass} placeholder="Tell us what you need" rows={4} value={form.message} onChange={(e) => update('message', e.target.value)} />
               {errorMsg && <p className="text-sm text-red-400">{errorMsg}</p>}
-              <button type="submit" disabled={status === 'submitting'} className="w-full rounded-full bg-blue-600 hover:bg-blue-500 disabled:opacity-60 px-6 py-3 text-sm font-semibold text-white transition-colors">
+              <button type="submit" disabled={status === 'submitting'} className="w-full rounded-full bg-yellow-400 hover:bg-yellow-300 disabled:opacity-60 px-6 py-3 text-sm font-semibold text-[#071a3d] transition-colors">
                 {status === 'submitting' ? 'Sending...' : 'Send Enquiry'}
               </button>
             </>
@@ -600,7 +600,7 @@ function LandingPage({ page }: { page: string }) {
     api.get('/api/site-settings').then((res) => res.data.settings && setSettings((current) => ({ ...current, ...res.data.settings, projects: res.data.settings.projects || current.projects, solutions: res.data.settings.solutions || current.solutions }))).catch(() => undefined);
   }, []);
   return (
-    <div className="min-h-screen bg-[#050810] relative">
+    <div className="min-h-screen bg-[#071a3d] relative">
       <AnimatedBackground />
       <div className="relative z-10">
         <Navbar logoUrl={assets.logo} />
