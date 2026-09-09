@@ -2,14 +2,14 @@ import { useState, useEffect, type FormEvent } from 'react';
 import { api } from './api';
 import {
   Menu, X, ArrowRight, ChevronRight, CheckCircle2, Building2, CreditCard, Users, Package,
-  ShoppingCart, BarChart3, Code2, Smartphone, Wallet, MessageCircle, Phone, Mail, MapPin,
-  Scissors, Laptop, Shirt, Home as HomeIcon, Camera, Store, Globe2,
+  ShoppingCart, BarChart3, MessageCircle, Phone, Mail, MapPin,
+  Scissors, Laptop, Globe2, ShieldCheck,
 } from 'lucide-react';
 import AdminPage from './AdminPage';
 import AnimatedBackground from './components/AnimatedBackground';
 import {
-  solutions, products, industries, processSteps, whyCards, problems, trustBadges,
-  pricingPlans, enquiryOptions, CONTACT_EMAIL, CONTACT_PHONE,
+  products, industries, processSteps, whyCards, problems, trustBadges,
+  enquiryOptions, CONTACT_EMAIL, CONTACT_PHONE,
   defaultSiteSettings, type ProductOS, type SiteSettings,
 } from './data';
 
@@ -173,61 +173,35 @@ function ProblemSection() {
   );
 }
 
-const solutionIcons = [Building2, CreditCard, Users, Package, ShoppingCart, BarChart3, Code2, Smartphone];
-
-function SolutionsSection({ items = solutions }: { items?: Solution[] }) {
-  return (
-    <section id="solutions" className="py-24 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <SectionHeading eyebrow="Solutions" title="Everything your business needs, in one place." />
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map((s, i) => {
-            const Icon = solutionIcons[i % solutionIcons.length];
-            return (
-              <a key={s.title} href={s.link || '#/contact'} className="group min-h-64 rounded-2xl border border-white/10 bg-white/5 p-8 hover:border-blue-500/50 hover:bg-blue-500/10 transition-all">
-                <div className="h-14 w-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500/20 transition-colors">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <h3 className="mt-6 text-xl font-semibold text-white">{s.title}</h3>
-                <p className="mt-3 text-base leading-7 text-slate-400">{s.desc}</p>
-                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-blue-300">Open system <ArrowRight className="h-4 w-4" /></span>
-              </a>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 const productIcons: Record<string, typeof Package> = {
-  safigroom: Scissors, amanitech: Laptop, amanifashion: Shirt, amanihome: HomeIcon, amanilens: Camera, amaniretail: Store,
+  safigroom: Scissors, amanitech: Laptop, malariawatch: Globe2, kgga: Building2, digishield: ShieldCheck,
 };
 
 function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
   return (
-    <section id="products" className="py-24 border-t border-white/5 bg-white/5">
+    <section id="solutions" className="py-24 border-t border-white/5 bg-white/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <SectionHeading eyebrow="Product Ecosystem" title="One technology company. Multiple business operating systems." sub="AmaniCode Solutions develops specialized systems for different industries while sharing a powerful technology foundation." />
+        <SectionHeading eyebrow="Solutions & Products" title="Our existing digital systems." sub="Each solution below is a live AmaniCode project. Select any dashboard to open it in a new tab, then return here whenever you are ready." />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p) => {
             const Icon = productIcons[p.id] || Package;
             return (
-              <div key={p.id} className="rounded-2xl border border-white/10 bg-[#0b2f6b] p-6 flex flex-col">
+              <a key={p.id} href={p.link || '#/contact'} target={p.link?.startsWith('http') ? '_blank' : undefined} rel={p.link?.startsWith('http') ? 'noopener noreferrer' : undefined} className="group rounded-2xl border border-white/10 bg-[#0b2f6b] p-6 flex flex-col hover:border-yellow-400/60 hover:bg-[#1557b0] transition-colors">
                 <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-700/10 flex items-center justify-center text-blue-400">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold text-white">{p.name}</h3>
+                <div className="mt-4 h-36 overflow-hidden rounded-xl border border-white/10 bg-[#071a3d] pointer-events-none">
+                  <iframe src={p.link} title={p.name + ' dashboard preview'} loading="lazy" className="h-[620px] w-full origin-top scale-[0.42]" />
+                </div>
                 <p className="mt-1 text-xs text-slate-500">{p.forWho.join(' \u2022 ')}</p>
                 <div className="mt-4 flex flex-wrap gap-1.5">
                   {p.features.map((f) => (
                     <span key={f} className="text-[11px] rounded-full border border-white/10 px-2 py-1 text-slate-400">{f}</span>
                   ))}
                 </div>
-                <a href={p.link || '#/contact'} target={p.link?.startsWith('http') ? '_blank' : undefined} rel={p.link?.startsWith('http') ? 'noopener noreferrer' : undefined} className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300">
-                  Explore {p.name.split(' ')[0]} <ChevronRight className="h-4 w-4" />
-                </a>
-              </div>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-yellow-300 group-hover:text-yellow-200">Open dashboard <ChevronRight className="h-4 w-4" /></span>
+              </a>
             );
           })}
         </div>
@@ -300,25 +274,6 @@ function FeatureShowcase() {
   );
 }
 
-function MpesaSection() {
-  const methods = ['M-Pesa', 'STK Push', 'Paybill', 'Till', 'Cash', 'Card'];
-  return (
-    <section className="py-24 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <SectionHeading eyebrow="Kenya-focused" title="Payments built for Africa." sub="Accept payments through familiar African payment methods and connect transactions directly to business operations." />
-          <p className="mt-6 text-xs text-slate-500 max-w-md">Actual payment integrations depend on approved API credentials and merchant setup. We'll configure this together during onboarding.</p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          {methods.map((m) => (
-            <span key={m} className="rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-sm text-slate-200 flex items-center gap-2"><Wallet className="h-4 w-4 text-blue-400" /> {m}</span>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function WhySection() {
   return (
     <section id="why" className="py-24 border-t border-white/5 bg-white/5">
@@ -349,27 +304,6 @@ function VisionSection() {
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           {['Modern', 'Innovative', 'Entrepreneurial', 'Ambitious', 'Connected'].map((w) => (
             <span key={w} className="rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-300">{w}</span>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CustomSoftwareSection() {
-  const services = ['Web applications', 'Mobile apps', 'Enterprise software', 'CRM', 'ERP', 'POS', 'E-commerce', 'APIs', 'Dashboards', 'Automation', 'Database systems', 'Cloud systems'];
-  return (
-    <section className="py-24 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <SectionHeading eyebrow="Custom Software" title="If your business doesn't fit standard software, we'll build what does." />
-          <a href="#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-yellow-400 hover:bg-yellow-300 px-6 py-3 text-sm font-semibold text-[#071a3d]">Discuss Your Project <ArrowRight className="h-4 w-4" /></a>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          {services.map((s) => (
-            <div key={s} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300 flex items-center gap-2">
-              <Code2 className="h-3.5 w-3.5 text-blue-400 shrink-0" /> {s}
-            </div>
           ))}
         </div>
       </div>
@@ -416,25 +350,6 @@ function AboutSection() {
           <div className="mt-6 flex flex-wrap gap-2">
             {values.map((v) => <span key={v} className="text-xs rounded-full border border-white/10 px-3 py-1.5 text-slate-300">{v}</span>)}
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PricingSection() {
-  return (
-    <section className="py-24 border-t border-white/5 bg-white/5">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <SectionHeading eyebrow="Pricing" title="Plans that grow with your business." sub="Pricing is tailored to your business size and needs. Talk to our team for a plan that fits." />
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {pricingPlans.map((p) => (
-            <div key={p.name} className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col">
-              <h3 className="text-lg font-semibold text-white">{p.name}</h3>
-              <p className="mt-2 text-sm text-slate-400 flex-1">{p.desc}</p>
-              <a href="#contact" className="mt-6 rounded-full border border-white/15 hover:border-blue-500/50 hover:text-blue-300 text-center px-5 py-2.5 text-sm font-medium text-white transition-colors">Talk to Sales</a>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -542,7 +457,7 @@ function ContactSection({ whatsappNumber = CONTACT_PHONE }: { whatsappNumber?: s
 
 function Footer() {
   const cols = [
-    { title: 'Solutions', items: solutions.slice(0, 5).map((s) => s.title) },
+    { title: 'Solutions', items: products.map((p) => p.name) },
     { title: 'Products', items: products.map((p) => p.name) },
     { title: 'Industries', items: industries.slice(0, 6).map((i) => i.name) },
     { title: 'Company', items: ['About', 'Why AmaniCode', 'Careers', 'Contact'] },
@@ -597,7 +512,16 @@ function LandingPage({ page }: { page: string }) {
   const [settings, setSettings] = useState<SiteSettings>(defaultSiteSettings);
   useEffect(() => {
     api.get('/api/site-assets').then((res) => setAssets(res.data.assets || {})).catch(() => undefined);
-    api.get('/api/site-settings').then((res) => res.data.settings && setSettings((current) => ({ ...current, ...res.data.settings, projects: res.data.settings.projects || current.projects, solutions: res.data.settings.solutions || current.solutions }))).catch(() => undefined);
+    api.get('/api/site-settings').then((res) => {
+      if (!res.data.settings) return;
+      const savedProjects = Array.isArray(res.data.settings.projects) ? res.data.settings.projects : [];
+      setSettings((current) => ({
+        ...current,
+        ...res.data.settings,
+        projects: products.map((product) => ({ ...product, ...savedProjects.find((saved: ProductOS) => saved.id === product.id) })),
+        solutions: res.data.settings.solutions || current.solutions,
+      }));
+    }).catch(() => undefined);
   }, []);
   return (
     <div className="min-h-screen bg-[#071a3d] relative">
@@ -605,8 +529,8 @@ function LandingPage({ page }: { page: string }) {
       <div className="relative z-10">
         <Navbar logoUrl={assets.logo} />
         {page === 'home' && <><Hero /><TrustStrip /><ProblemSection /><FeatureShowcase /></>}
-        {page === 'solutions' && <><SolutionsSection items={settings.solutions} /><CustomSoftwareSection /><MpesaSection /></>}
-        {page === 'products' && <><ProductsSection projects={settings.projects} /><PricingSection /></>}
+          {page === 'solutions' && <ProductsSection projects={settings.projects} />}
+          {page === 'products' && <ProductsSection projects={settings.projects} />}
         {page === 'industries' && <IndustriesSection />}
         {page === 'why' && <><WhySection /><VisionSection /></>}
         {page === 'about' && <><AboutSection /><ProcessSection /></>}
