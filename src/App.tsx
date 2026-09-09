@@ -2,33 +2,16 @@ import { useState, useEffect, type FormEvent } from 'react';
 import { api } from './api';
 import {
   Menu, X, ArrowRight, ChevronRight, CheckCircle2, Building2, CreditCard, Users, Package,
-  ShoppingCart, BarChart3, MessageCircle, Phone, Mail, MapPin,
+  ShoppingCart, BarChart3, MessageCircle, Phone, Mail, MapPin, Smartphone,
   Scissors, Laptop, Globe2, ShieldCheck,
 } from 'lucide-react';
 import AdminPage from './AdminPage';
 import AnimatedBackground from './components/AnimatedBackground';
 import {
-  products, industries, processSteps, whyCards, problems, trustBadges,
-  enquiryOptions, CONTACT_EMAIL, CONTACT_PHONE,
+  solutions, products, industries, processSteps, whyCards, problems, trustBadges,
+  pricingPlans, enquiryOptions, CONTACT_EMAIL, CONTACT_PHONE,
   defaultSiteSettings, type ProductOS, type SiteSettings,
 } from './data';
-
-function AnimatedNumber({ target, prefix = '', duration = 1400 }: { target: number; prefix?: string; duration?: number }) {
-  const [value, setValue] = useState(0);
-  useEffect(() => {
-    let start: number | null = null;
-    let frame = 0;
-    const step = (ts: number) => {
-      if (start === null) start = ts;
-      const progress = Math.min((ts - start) / duration, 1);
-      setValue(Math.floor(progress * target));
-      if (progress < 1) frame = requestAnimationFrame(step);
-    };
-    frame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frame);
-  }, [target, duration]);
-  return <span>{prefix}{value.toLocaleString()}</span>;
-}
 
 function SectionHeading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
   return (
@@ -49,7 +32,7 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   const links: [string, string][] = [
-    ['Home', '#/home'], ['Solutions', '#/solutions'], ['Products', '#/products'],
+    ['Home', '#/home'], ['Solutions', '#/solutions'], ['Products', '#/products'], ['Pricing', '#/pricing'],
     ['Industries', '#/industries'], ['Why AmaniCode', '#/why'], ['About', '#/about'],
     ['Resources', '#/resources'], ['Contact', '#/contact'],
   ];
@@ -87,13 +70,6 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
 }
 
 function Hero() {
-  const metrics: { label: string; value: number; prefix?: string }[] = [
-    { label: 'Orders', value: 1284 },
-    { label: 'Customers', value: 3927 },
-    { label: 'Inventory', value: 5610 },
-    { label: 'Appointments', value: 268 },
-    { label: 'Branches', value: 6 },
-  ];
   return (
     <section id="home" className="relative overflow-hidden pt-36 pb-24 grid-bg">
       <div className="absolute inset-0 glow pointer-events-none" />
@@ -115,21 +91,6 @@ function Hero() {
           <p className="mt-6 text-xs uppercase tracking-widest text-slate-500">Kenya &bull; Africa &bull; Global</p>
         </div>
 
-        <div className="mt-16 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-4 sm:p-6 shadow-2xl shadow-blue-900/20 animate-float">
-          <div className="flex items-center gap-2 mb-5">
-            <span className="h-3 w-3 rounded-full bg-blue-400/70" /><span className="h-3 w-3 rounded-full bg-yellow-400/70" /><span className="h-3 w-3 rounded-full bg-white/70" />
-            <span className="ml-3 text-xs text-slate-500">amanicode-dashboard</span>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {metrics.map((m) => (
-              <div key={m.label} className="rounded-xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs text-slate-500">{m.label}</p>
-                <p className="mt-1 text-lg sm:text-xl font-semibold text-white"><AnimatedNumber target={m.value} prefix={m.prefix} /></p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 text-[11px] text-slate-600">Operational activity shown for illustration purposes.</p>
-        </div>
       </div>
     </section>
   );
@@ -177,11 +138,36 @@ const productIcons: Record<string, typeof Package> = {
   safigroom: Scissors, amanitech: Laptop, malariawatch: Globe2, kgga: Building2, digishield: ShieldCheck,
 };
 
+const solutionIcons = [Building2, CreditCard, Users, Package, ShoppingCart, BarChart3, Package, Smartphone];
+
+function SolutionsSection({ items = solutions }: { items?: typeof solutions }) {
+  return (
+    <section id="solutions" className="py-24 border-t border-blue-100">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+        <SectionHeading eyebrow="Solutions" title="Business capabilities that work together." sub="Choose the capability your organization needs, then explore our existing products for live systems." />
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map((solution, index) => {
+            const Icon = solutionIcons[index % solutionIcons.length];
+            return (
+              <a key={solution.title} href={solution.link || '#/contact'} className="group min-h-56 border-b border-blue-100 py-6 hover:border-yellow-400 transition-colors">
+                <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-700 group-hover:bg-yellow-100 transition-colors"><Icon className="h-5 w-5" /></div>
+                <h3 className="mt-5 text-lg font-semibold text-[#071a3d]">{solution.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{solution.desc}</p>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700">Learn more <ArrowRight className="h-4 w-4" /></span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
   return (
-    <section id="solutions" className="py-24 border-t border-white/5 bg-white/5">
+    <section id="products" className="py-24 border-t border-blue-100 bg-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <SectionHeading eyebrow="Solutions & Products" title="Our existing digital systems." sub="Each solution below is a live AmaniCode project. Select any dashboard to open it in a new tab, then return here whenever you are ready." />
+        <SectionHeading eyebrow="Products" title="Our existing digital systems." sub="Each product below is a live AmaniCode project. Select any dashboard to open it in a new tab, then return here whenever you are ready." />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p) => {
             const Icon = productIcons[p.id] || Package;
@@ -204,6 +190,29 @@ function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
               </a>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PricingSection() {
+  return (
+    <section id="pricing" className="py-24 border-t border-blue-100 bg-white">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        <SectionHeading eyebrow="Investment plans" title="Web development packages" sub="Transparent pricing for every stage of your business. No hidden fees." />
+        <div className="mt-12 grid lg:grid-cols-3 gap-5">
+          {pricingPlans.map((plan, index) => (
+            <div key={plan.name} className={'p-6 flex flex-col border ' + (index === 1 ? 'border-blue-700 bg-[#071a3d] text-white' : 'border-blue-100 bg-white text-[#071a3d]')}>
+              <span className={'self-start rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wide ' + (index === 1 ? 'bg-yellow-400 text-[#071a3d]' : 'bg-blue-50 text-blue-700')}>{plan.name} package</span>
+              <h3 className="mt-6 text-3xl font-bold">{plan.price}</h3>
+              <p className={'mt-2 text-sm leading-6 ' + (index === 1 ? 'text-blue-100' : 'text-slate-600')}>{plan.desc}</p>
+              <ul className={'mt-6 space-y-3 border-t pt-5 text-sm flex-1 ' + (index === 1 ? 'border-white/15 text-blue-50' : 'border-blue-100 text-slate-700')}>
+                {plan.features.map((feature) => <li key={feature} className="flex gap-2"><CheckCircle2 className={'h-4 w-4 shrink-0 ' + (index === 1 ? 'text-yellow-400' : 'text-blue-600')} /> {feature}</li>)}
+              </ul>
+              <a href="#/contact" className={'mt-7 rounded-lg px-4 py-3 text-center text-sm font-semibold ' + (index === 1 ? 'bg-yellow-400 text-[#071a3d] hover:bg-yellow-300' : 'bg-[#071a3d] text-white hover:bg-blue-700')}>{index === 0 ? 'Build Your Presence' : index === 1 ? 'Get Started' : 'Contact Us'}</a>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -524,13 +533,14 @@ function LandingPage({ page }: { page: string }) {
     }).catch(() => undefined);
   }, []);
   return (
-    <div className="min-h-screen bg-[#071a3d] relative">
+    <div className="public-site min-h-screen bg-white relative">
       <AnimatedBackground />
       <div className="relative z-10">
         <Navbar logoUrl={assets.logo} />
         {page === 'home' && <><Hero /><TrustStrip /><ProblemSection /><FeatureShowcase /></>}
-          {page === 'solutions' && <ProductsSection projects={settings.projects} />}
+          {page === 'solutions' && <SolutionsSection items={settings.solutions} />}
           {page === 'products' && <ProductsSection projects={settings.projects} />}
+          {page === 'pricing' && <PricingSection />}
         {page === 'industries' && <IndustriesSection />}
         {page === 'why' && <><WhySection /><VisionSection /></>}
         {page === 'about' && <><AboutSection /><ProcessSection /></>}
@@ -552,7 +562,7 @@ function App() {
   }, []);
   if (hash.startsWith('#/admin')) return <AdminPage />;
   const page = hash.startsWith('#/') ? hash.slice(2) : 'home';
-  const publicPages = ['home', 'solutions', 'products', 'industries', 'why', 'about', 'resources', 'contact'];
+  const publicPages = ['home', 'solutions', 'products', 'pricing', 'industries', 'why', 'about', 'resources', 'contact'];
   return <LandingPage page={publicPages.includes(page) ? page : 'home'} />;
 }
 

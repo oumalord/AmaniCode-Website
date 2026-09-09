@@ -18,10 +18,16 @@ html {
 }
 
 body {
-  background-color: var(--navy);
+  background-color: var(--white);
   color: var(--white);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
+
+.public-site .text-white { color: var(--blue-950) !important; }
+.public-site .bg-\[\#071a3d\],
+.public-site .bg-\[\#0b2f6b\] { background-color: var(--white) !important; }
+.public-site .bg-green-500 .text-white { color: var(--white) !important; }
+.public-site .bg-blue-600.text-white { color: var(--white) !important; }
 
 .grid-bg {
   background-image:

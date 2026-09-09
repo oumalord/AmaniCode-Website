@@ -46,7 +46,7 @@ export default function AnimatedBackground() {
 
     function tick() {
       if (!ctx || !canvas) return;
-      ctx.fillStyle = '#071a3d';
+      ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, width, height);
 
       for (const n of nodes) {
@@ -64,7 +64,7 @@ export default function AnimatedBackground() {
           const dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 150) {
-            ctx.strokeStyle = 'rgba(91,147,255,' + (0.14 * (1 - dist / 150)).toFixed(3) + ')';
+            ctx.strokeStyle = 'rgba(21,87,176,' + (0.1 * (1 - dist / 150)).toFixed(3) + ')';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -75,7 +75,7 @@ export default function AnimatedBackground() {
       }
 
       for (const n of nodes) {
-        ctx.fillStyle = 'rgba(120,163,255,0.65)';
+        ctx.fillStyle = 'rgba(21,87,176,0.35)';
         ctx.beginPath();
         ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
         ctx.fill();

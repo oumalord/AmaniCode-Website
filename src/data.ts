@@ -87,12 +87,11 @@ export const problems: string[] = [
 
 export const trustBadges: string[] = ['M-Pesa Ready', 'Mobile First', 'Cloud Based', 'Multi-Branch', 'Secure', 'Scalable', 'Real-Time Analytics', 'WhatsApp Ready'];
 
-export interface PricingPlan { name: string; desc: string; }
+export interface PricingPlan { name: string; price: string; desc: string; features: string[]; }
 export const pricingPlans: PricingPlan[] = [
-  { name: 'Starter', desc: 'For small businesses getting started with digital tools.' },
-  { name: 'Growth', desc: 'For growing businesses that need more power and automation.' },
-  { name: 'Business', desc: 'For established companies running multi-branch operations.' },
-  { name: 'Enterprise', desc: 'For organizations requiring custom-built solutions.' },
+  { name: 'Starter', price: 'KES 30,000', desc: 'A professional starting point for individuals, startups, and small businesses building their online presence.', features: ['Up to 5 pages', 'Basic UI/UX design', 'Mobile-responsive design', 'Contact/enquiry forms', 'Basic SEO setup', 'Basic deployment support'] },
+  { name: 'Business', price: 'KES 80,000+', desc: 'A professional website for growing businesses and organizations that need a stronger digital presence.', features: ['Custom web application', 'Up to 10-15 pages', 'Content management functionality', 'API & database integrations', 'Performance optimization', 'Deployment support'] },
+  { name: 'Enterprise', price: 'KES 150,000+', desc: 'Advanced web experiences with custom functionality and integrations beyond a standard business website.', features: ['Fully advanced software application', 'Multiple API integrations', 'AI integrations & automation', 'Scalable future-ready architecture', 'Performance & security optimization', 'User accounts where required'] },
 ];
 
 export const enquiryOptions: string[] = [
