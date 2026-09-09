@@ -24,6 +24,11 @@ body {
 }
 
 .public-site .text-white { color: var(--blue-950) !important; }
+.public-site .text-slate-300 { color: #334155 !important; }
+.public-site .text-slate-400 { color: #475569 !important; }
+.public-site .text-slate-500 { color: #64748b !important; }
+.public-site .text-slate-600 { color: #475569 !important; }
+.public-site .text-slate-200 { color: #1e293b !important; }
 .public-site .bg-\[\#071a3d\],
 .public-site .bg-\[\#0b2f6b\] { background-color: var(--white) !important; }
 .public-site .bg-green-500 .text-white { color: var(--white) !important; }

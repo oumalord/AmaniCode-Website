@@ -23,7 +23,7 @@ function SectionHeading({ eyebrow, title, sub }: { eyebrow: string; title: strin
   );
 }
 
-function Navbar({ logoUrl }: { logoUrl?: string }) {
+function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeHref, setActiveHref] = useState(window.location.hash || '#/home');
   useEffect(() => {
@@ -35,15 +35,14 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
   }, []);
   const links: [string, string][] = [
     ['Home', '#/home'], ['Solutions', '#/solutions'], ['Products', '#/products'], ['Pricing', '#/pricing'],
-    ['Industries', '#/industries'], ['About', '#/about'],
+    ['About', '#/about'],
     ['Resources', '#/resources'], ['Contact', '#/contact'],
   ];
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-sm">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-8 py-2">
         <a href="#/home" className="flex items-center gap-3 font-semibold text-[#071a3d] text-xl tracking-tight" aria-label="AmaniCode Solutions home">
-          {logoUrl && <img src={logoUrl} alt="AmaniCode Solutions" className="brand-logo" />}
-          {!logoUrl && <>AmaniCode <span className="text-blue-400 font-normal hidden sm:inline">Solutions</span></>}
+          AmaniCode <span className="text-blue-700 font-normal hidden sm:inline">Solutions</span>
         </a>
         <div className="hidden lg:flex items-center gap-1 text-sm font-semibold text-[#071a3d]">
           {links.map(([label, href]) => (
@@ -511,10 +510,8 @@ function WhatsAppButton({ whatsappNumber }: { whatsappNumber: string }) {
 }
 
 function LandingPage({ page }: { page: string }) {
-  const [assets, setAssets] = useState<Record<string, string>>({});
   const [settings, setSettings] = useState<SiteSettings>(defaultSiteSettings);
   useEffect(() => {
-    api.get('/api/site-assets').then((res) => setAssets(res.data.assets || {})).catch(() => undefined);
     api.get('/api/site-settings').then((res) => {
       if (!res.data.settings) return;
       const savedProjects = Array.isArray(res.data.settings.projects) ? res.data.settings.projects : [];
@@ -530,7 +527,7 @@ function LandingPage({ page }: { page: string }) {
     <div className="public-site min-h-screen bg-white relative">
       <AnimatedBackground />
       <div className="relative z-10">
-        <Navbar logoUrl={assets.logo} />
+        <Navbar />
         {page === 'home' && <><Hero /><TrustStrip /><ProblemSection /><FeatureShowcase /></>}
           {page === 'solutions' && <SolutionsSection items={settings.solutions} />}
           {page === 'products' && <ProductsSection projects={settings.projects} />}
