@@ -194,16 +194,17 @@ function PricingSection() {
     <section id="pricing" className="py-24 border-t border-blue-100 bg-white">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <SectionHeading eyebrow="Investment plans" title="Web development packages" sub="Transparent pricing for every stage of your business. No hidden fees." />
-        <div className="mt-12 grid lg:grid-cols-3 gap-5">
+        <div className="mt-12 grid lg:grid-cols-3 gap-6 items-start">
           {pricingPlans.map((plan, index) => (
-            <div key={plan.name} className={'p-6 flex flex-col border ' + (index === 1 ? 'border-blue-700 bg-[#071a3d] text-white' : 'border-blue-100 bg-white text-[#071a3d]')}>
-              <span className={'self-start rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wide ' + (index === 1 ? 'bg-yellow-400 text-[#071a3d]' : 'bg-blue-50 text-blue-700')}>{plan.name} package</span>
+            <div key={plan.name} className={'relative p-6 flex flex-col rounded-2xl border-2 bg-white text-[#071a3d] shadow-sm ' + (index === 1 ? 'border-yellow-400 shadow-lg' : 'border-blue-100')}>
+              {index === 1 && <span className="absolute -top-3 left-6 rounded-full bg-yellow-400 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-[#071a3d]">Most popular</span>}
+              <span className="self-start rounded-full bg-blue-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-blue-700">{plan.name} package</span>
               <h3 className="mt-6 text-3xl font-bold">{plan.price}</h3>
-              <p className={'mt-2 text-sm leading-6 ' + (index === 1 ? 'text-blue-100' : 'text-slate-600')}>{plan.desc}</p>
-              <ul className={'mt-6 space-y-3 border-t pt-5 text-sm flex-1 ' + (index === 1 ? 'border-white/15 text-blue-50' : 'border-blue-100 text-slate-700')}>
-                {plan.features.map((feature) => <li key={feature} className="flex gap-2"><CheckCircle2 className={'h-4 w-4 shrink-0 ' + (index === 1 ? 'text-yellow-400' : 'text-blue-600')} /> {feature}</li>)}
+              <p className="mt-2 text-sm leading-6 text-slate-700">{plan.desc}</p>
+              <ul className="mt-6 space-y-3 border-t border-blue-100 pt-5 text-sm flex-1 text-slate-800">
+                {plan.features.map((feature) => <li key={feature} className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-blue-600" /> {feature}</li>)}
               </ul>
-              <a href="#/contact" className={'mt-7 rounded-lg px-4 py-3 text-center text-sm font-semibold ' + (index === 1 ? 'bg-yellow-400 text-[#071a3d] hover:bg-yellow-300' : 'bg-[#071a3d] text-white hover:bg-blue-700')}>{index === 0 ? 'Build Your Presence' : index === 1 ? 'Get Started' : 'Contact Us'}</a>
+              <a href="#/contact" className={'mt-7 rounded-lg px-4 py-3 text-center text-sm font-semibold transition-colors ' + (index === 1 ? 'bg-yellow-400 text-[#071a3d] hover:bg-yellow-300' : 'bg-[#071a3d] text-white hover:bg-blue-700')}>{index === 0 ? 'Build Your Presence' : index === 1 ? 'Get Started' : 'Contact Us'}</a>
             </div>
           ))}
         </div>
