@@ -25,12 +25,14 @@ export const products: ProductOS[] = [
 
 export interface SiteSettings {
   whatsappNumber: string;
+  contactEmail: string;
   projects: ProductOS[];
   solutions: Solution[];
 }
 
 export const defaultSiteSettings: SiteSettings = {
   whatsappNumber: '+254746542433',
+  contactEmail: CONTACT_EMAIL,
   projects: products.map((product) => ({ ...product })),
   solutions: solutions.map((solution) => ({ ...solution, link: '#/contact' })),
 };

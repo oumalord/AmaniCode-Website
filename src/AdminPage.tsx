@@ -199,6 +199,8 @@ export default function AdminPage() {
             <div className="rounded-xl border border-white/10 bg-white/5 p-5">
               <label className="block text-sm font-medium text-white">WhatsApp number</label>
               <input value={settings.whatsappNumber} onChange={(e) => setSettings((current) => ({ ...current, whatsappNumber: e.target.value }))} placeholder="+254746542433" className="mt-3 w-full rounded-lg border border-white/10 bg-[#080c17] px-3 py-2.5 text-sm text-white" />
+              <label className="mt-5 block text-sm font-medium text-white">Contact email</label>
+              <input type="email" value={settings.contactEmail} onChange={(e) => setSettings((current) => ({ ...current, contactEmail: e.target.value }))} placeholder="hello@amanicode.co.ke" className="mt-3 w-full rounded-lg border border-white/10 bg-[#080c17] px-3 py-2.5 text-sm text-white" />
             </div>
             <div>
               <h2 className="text-lg font-semibold text-white">Projects</h2>

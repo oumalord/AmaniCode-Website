@@ -78,9 +78,11 @@ const server = createServer(async (request, response) => {
       if (!isAdmin(requestUrl, request)) return send(response, 401, { error: 'Unauthorized' });
       const settings = await readBody(request);
       const whatsappNumber = String(settings.whatsappNumber || '').replace(/[^0-9]/g, '');
-      if (whatsappNumber.length < 8 || whatsappNumber.length > 15 || !Array.isArray(settings.projects) || !Array.isArray(settings.solutions)) return send(response, 400, { error: 'Invalid site settings.' });
-      await saveRecord('site-settings', 'main', { whatsappNumber, projects: settings.projects, solutions: settings.solutions });
-      return send(response, 200, { settings: { whatsappNumber, projects: settings.projects, solutions: settings.solutions } });
+      const contactEmail = String(settings.contactEmail || '').trim();
+      if (whatsappNumber.length < 8 || whatsappNumber.length > 15 || !/^\S+@\S+\.\S+$/.test(contactEmail) || !Array.isArray(settings.projects) || !Array.isArray(settings.solutions)) return send(response, 400, { error: 'Invalid site settings.' });
+      const siteSettings = { whatsappNumber, contactEmail, projects: settings.projects, solutions: settings.solutions };
+      await saveRecord('site-settings', 'main', siteSettings);
+      return send(response, 200, { settings: siteSettings });
     }
     if (request.method === 'POST' && path === '/api/leads') {
       const body = await readBody(request);

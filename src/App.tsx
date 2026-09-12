@@ -190,13 +190,15 @@ function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
 }
 
 function PricingSection() {
+  const [activePlan, setActivePlan] = useState(1);
+
   return (
     <section id="pricing" className="py-24 border-t border-blue-100 bg-white">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <SectionHeading eyebrow="Investment plans" title="Web development packages" sub="Transparent pricing for every stage of your business. No hidden fees." />
         <div className="mt-12 grid lg:grid-cols-3 gap-6 items-start">
           {pricingPlans.map((plan, index) => (
-            <div key={plan.name} className={'relative p-6 flex flex-col rounded-2xl border-2 bg-white text-[#071a3d] shadow-sm ' + (index === 1 ? 'border-yellow-400 shadow-lg' : 'border-blue-100')}>
+            <div key={plan.name} onClick={() => setActivePlan(index)} className={'relative cursor-pointer p-6 flex flex-col rounded-2xl border-2 bg-white text-[#071a3d] shadow-sm transition-all ' + (index === activePlan ? 'border-yellow-400 shadow-lg -translate-y-1' : 'border-blue-100 hover:border-yellow-300')}>
               {index === 1 && <span className="absolute -top-3 left-6 rounded-full bg-yellow-400 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-[#071a3d]">Most popular</span>}
               <span className="self-start rounded-full bg-blue-50 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-blue-700">{plan.name} package</span>
               <h3 className="mt-6 text-3xl font-bold">{plan.price}</h3>
@@ -204,7 +206,7 @@ function PricingSection() {
               <ul className="mt-6 space-y-3 border-t border-blue-100 pt-5 text-sm flex-1 text-slate-800">
                 {plan.features.map((feature) => <li key={feature} className="flex gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-blue-600" /> {feature}</li>)}
               </ul>
-              <a href="#/contact" className={'mt-7 rounded-lg px-4 py-3 text-center text-sm font-semibold transition-colors ' + (index === 1 ? 'bg-yellow-400 text-[#071a3d] hover:bg-yellow-300' : 'bg-[#071a3d] text-white hover:bg-blue-700')}>{index === 0 ? 'Build Your Presence' : index === 1 ? 'Get Started' : 'Contact Us'}</a>
+              <a href="#/contact" className={'mt-7 rounded-lg px-4 py-3 text-center text-sm font-semibold transition-colors ' + (index === activePlan ? 'bg-yellow-400 text-[#071a3d] hover:bg-yellow-300' : 'bg-[#071a3d] text-white hover:bg-blue-700')}>{index === 0 ? 'Build Your Presence' : index === 1 ? 'Get Started' : 'Contact Us'}</a>
             </div>
           ))}
         </div>
@@ -380,7 +382,7 @@ interface ContactForm {
 
 const emptyForm: ContactForm = { name: '', business: '', email: '', phone: '', country: '', industry: '', interest: enquiryOptions[0], budget: '', message: '' };
 
-function ContactSection({ whatsappNumber = CONTACT_PHONE }: { whatsappNumber?: string }) {
+function ContactSection({ whatsappNumber = CONTACT_PHONE, contactEmail = CONTACT_EMAIL }: { whatsappNumber?: string; contactEmail?: string }) {
   const [form, setForm] = useState<ContactForm>(emptyForm);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
@@ -414,7 +416,7 @@ function ContactSection({ whatsappNumber = CONTACT_PHONE }: { whatsappNumber?: s
           <SectionHeading eyebrow="Contact" title="Let's build something that moves your business forward." />
           <div className="mt-8 space-y-4 text-sm text-slate-300">
             <a href={'https://wa.me/' + whatsappNumber.replace(/\D/g, '')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white"><Phone className="h-4 w-4 text-blue-400" /> {whatsappNumber}</a>
-            <p className="flex items-center gap-3"><Mail className="h-4 w-4 text-blue-400" /> {CONTACT_EMAIL}</p>
+            <a href={'mailto:' + contactEmail} className="flex items-center gap-3 hover:text-white"><Mail className="h-4 w-4 text-blue-400" /> {contactEmail}</a>
             <p className="flex items-center gap-3"><MapPin className="h-4 w-4 text-blue-400" /> Nairobi, Kenya</p>
           </div>
           <p className="mt-6 text-xs text-slate-600">Contact details shown are placeholders and should be updated to AmaniCode's real details.</p>
@@ -539,7 +541,7 @@ function LandingPage({ page }: { page: string }) {
         {page === 'why' && <><WhySection /><VisionSection /></>}
         {page === 'about' && <><AboutSection /><ProcessSection /></>}
         {page === 'resources' && <ResourcesSection />}
-        {page === 'contact' && <ContactSection whatsappNumber={settings.whatsappNumber} />}
+        {page === 'contact' && <ContactSection whatsappNumber={settings.whatsappNumber} contactEmail={settings.contactEmail} />}
         <Footer />
         <WhatsAppButton whatsappNumber={settings.whatsappNumber} />
       </div>

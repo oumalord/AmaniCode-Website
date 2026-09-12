@@ -63,8 +63,9 @@ export default async function handler(request, response) {
       if (!isAdmin(request, adminKey)) return response.status(401).json({ error: 'Unauthorized' });
       const settings = request.body || {};
       const whatsappNumber = String(settings.whatsappNumber || '').replace(/[^0-9]/g, '');
-      if (whatsappNumber.length < 8 || whatsappNumber.length > 15 || !Array.isArray(settings.projects) || !Array.isArray(settings.solutions)) return response.status(400).json({ error: 'Invalid site settings.' });
-      const record = { whatsappNumber, projects: settings.projects, solutions: settings.solutions };
+      const contactEmail = String(settings.contactEmail || '').trim();
+      if (whatsappNumber.length < 8 || whatsappNumber.length > 15 || !/^\S+@\S+\.\S+$/.test(contactEmail) || !Array.isArray(settings.projects) || !Array.isArray(settings.solutions)) return response.status(400).json({ error: 'Invalid site settings.' });
+      const record = { whatsappNumber, contactEmail, projects: settings.projects, solutions: settings.solutions };
       await saveRecord(sql, 'site-settings', 'main', record);
       return response.status(200).json({ settings: record });
     }
