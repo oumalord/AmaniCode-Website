@@ -139,18 +139,18 @@ const solutionIcons = [Building2, CreditCard, Users, Package, ShoppingCart, BarC
 
 function SolutionsSection({ items = solutions }: { items?: typeof solutions }) {
   return (
-    <section id="solutions" className="py-24 border-t border-blue-100">
+    <section id="solutions" className="solutions-section py-16 sm:py-24 border-t border-blue-100">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <SectionHeading eyebrow="Solutions" title="Business capabilities that work together." sub="Choose the capability your organization needs, then explore our existing products for live systems." />
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {items.map((solution, index) => {
             const Icon = solutionIcons[index % solutionIcons.length];
             return (
-              <a key={solution.title} href={solution.link || '#/contact'} className="group min-h-56 border-b border-blue-100 py-6 hover:border-yellow-400 transition-colors">
+              <a key={solution.title} href={solution.link || '#/contact'} className="solution-card group min-h-56 border-b border-blue-100 py-6 hover:border-yellow-400 transition-colors">
                 <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-700 group-hover:bg-yellow-100 transition-colors"><Icon className="h-5 w-5" /></div>
-                <h3 className="mt-5 text-lg font-semibold text-[#071a3d]">{solution.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{solution.desc}</p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700">Learn more <ArrowRight className="h-4 w-4" /></span>
+                <h3 className="mt-5 text-xl font-semibold text-[#071a3d]">{solution.title}</h3>
+                <p className="mt-2 text-[15px] leading-6 text-slate-600">{solution.desc}</p>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-blue-700">Learn more <ArrowRight className="h-4 w-4" /></span>
               </a>
             );
           })}
