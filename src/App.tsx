@@ -163,9 +163,9 @@ function SolutionsSection({ items = solutions }: { items?: typeof solutions }) {
 function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
   return (
     <section id="products" className="py-24 border-t border-blue-100 bg-white">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+      <div className="max-w-[100rem] mx-auto px-5 sm:px-8">
         <SectionHeading eyebrow="Products" title="Our existing digital systems." sub="Each product below is a live AmaniCode project. Select any dashboard to open it in a new tab, then return here whenever you are ready." />
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {projects.map((p) => {
             return (
               <a key={p.id} href={p.link || '#/contact'} target={p.link?.startsWith('http') ? '_blank' : undefined} rel={p.link?.startsWith('http') ? 'noopener noreferrer' : undefined} className="group rounded-2xl border border-blue-100 bg-white p-6 flex flex-col shadow-sm hover:border-yellow-400 hover:shadow-md transition-all">
