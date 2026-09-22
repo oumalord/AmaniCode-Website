@@ -127,6 +127,23 @@ export default function AdminPage() {
     }));
   }
 
+  function addProject() {
+    setSettings((current) => ({
+      ...current,
+      projects: [
+        ...current.projects,
+        { id: 'product-' + Date.now().toString(36), name: 'New Product', forWho: [], features: [], link: '' },
+      ],
+    }));
+  }
+
+  function removeProject(index: number) {
+    setSettings((current) => ({
+      ...current,
+      projects: current.projects.filter((_, projectIndex) => projectIndex !== index),
+    }));
+  }
+
   function updateSolution(index: number, field: keyof Solution, value: string) {
     setSettings((current) => ({
       ...current,
@@ -203,15 +220,21 @@ export default function AdminPage() {
               <input type="email" value={settings.contactEmail} onChange={(e) => setSettings((current) => ({ ...current, contactEmail: e.target.value }))} placeholder="hello@amanicode.co.ke" className="mt-3 w-full rounded-lg border border-white/10 bg-[#080c17] px-3 py-2.5 text-sm text-white" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-white">Projects</h2>
-              <p className="mt-1 text-sm text-slate-400">Edit the public product cards and enter a website URL or a page link such as #/contact.</p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-semibold text-white">Projects</h2>
+                  <p className="mt-1 text-sm text-slate-400">Edit the public product cards and enter a website URL or a page link such as #/contact.</p>
+                </div>
+                <button type="button" onClick={addProject} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500">+ Add Product</button>
+              </div>
               <div className="mt-5 space-y-5">
                 {settings.projects.map((project, index) => (
                   <div key={project.id} className="rounded-xl border border-white/10 bg-white/5 p-5 grid gap-4 sm:grid-cols-2">
                     <label className="text-xs text-slate-400">Project name<input value={project.name} onChange={(e) => updateProject(index, 'name', e.target.value)} className="mt-1.5 w-full rounded-lg border border-white/10 bg-[#080c17] px-3 py-2 text-sm text-white" /></label>
-                    <label className="text-xs text-slate-400">Project link<input value={project.link || ''} onChange={(e) => updateProject(index, 'link', e.target.value)} className="mt-1.5 w-full rounded-lg border border-white/10 bg-[#080c17] px-3 py-2 text-sm text-white" /></label>
+                    <label className="text-xs text-slate-400">Project link<input value={project.link || ''} onChange={(e) => updateProject(index, 'link', e.target.value)} placeholder="https://your-product.vercel.app" className="mt-1.5 w-full rounded-lg border border-white/10 bg-[#080c17] px-3 py-2 text-sm text-white" /></label>
                     <label className="text-xs text-slate-400">Audience, separated by commas<input value={project.forWho.join(', ')} onChange={(e) => updateProject(index, 'forWho', e.target.value)} className="mt-1.5 w-full rounded-lg border border-white/10 bg-[#080c17] px-3 py-2 text-sm text-white" /></label>
                     <label className="text-xs text-slate-400">Features, separated by commas<input value={project.features.join(', ')} onChange={(e) => updateProject(index, 'features', e.target.value)} className="mt-1.5 w-full rounded-lg border border-white/10 bg-[#080c17] px-3 py-2 text-sm text-white" /></label>
+                    <button type="button" onClick={() => removeProject(index)} className="sm:col-span-2 justify-self-start inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-2 text-xs text-slate-400 hover:text-red-400"><Trash2 className="h-3.5 w-3.5" /> Remove product</button>
                   </div>
                 ))}
               </div>

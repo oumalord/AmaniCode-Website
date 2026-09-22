@@ -523,7 +523,7 @@ function LandingPage({ page }: { page: string }) {
       setSettings((current) => ({
         ...current,
         ...res.data.settings,
-        projects: products.map((product) => ({ ...product, ...savedProjects.find((saved: ProductOS) => saved.id === product.id), name: product.name, link: product.link })),
+        projects: savedProjects.length ? savedProjects : products,
         solutions: res.data.settings.solutions || current.solutions,
       }));
     }).catch(() => undefined);
