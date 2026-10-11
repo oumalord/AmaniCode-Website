@@ -1,8 +1,9 @@
 import { randomUUID } from 'node:crypto';
 import { neon } from '@neondatabase/serverless';
 
-const assetKeys = new Set(['logo']);
+const assetKeys = new Set(['logo', 'heroMedia']);
 const imageDataUrl = /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/;
+const mediaDataUrl = /^data:(image\/(png|jpeg|webp|gif)|video\/(mp4|webm));base64,[A-Za-z0-9+/=]+$/;
 
 function requireEnvironment() {
   const { DATABASE_URL: databaseUrl, ADMIN_KEY: adminKey } = process.env;
@@ -51,7 +52,9 @@ export default async function handler(request, response) {
       if (!isAdmin(request, adminKey)) return response.status(401).json({ error: 'Unauthorized' });
       const { key, dataUrl = '' } = request.body || {};
       if (!assetKeys.has(key)) return response.status(400).json({ error: 'Unknown asset.' });
-      if (dataUrl && (!imageDataUrl.test(dataUrl) || dataUrl.length > 1_000_000)) return response.status(400).json({ error: 'Use a supported image under 750 KB.' });
+      const validDataUrl = key === 'logo' ? imageDataUrl.test(dataUrl) : mediaDataUrl.test(dataUrl);
+      const maxDataLength = key === 'heroMedia' ? 3_600_000 : 1_000_000;
+      if (dataUrl && (!validDataUrl || dataUrl.length > maxDataLength)) return response.status(400).json({ error: key === 'heroMedia' ? 'Use a supported photo or video under 2.5 MB.' : 'Use a supported image under 750 KB.' });
       await saveRecord(sql, 'site-assets', key, { key, dataUrl });
       return response.status(200).json({ key, dataUrl });
     }

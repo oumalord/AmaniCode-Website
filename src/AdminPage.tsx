@@ -20,11 +20,11 @@ interface Lead {
 }
 
 const STATUSES = ['New', 'Contacted', 'Qualified', 'Demo Scheduled', 'Proposal Sent', 'Won', 'Lost'];
-function readImage(file: File): Promise<string> {
+function readFileAsDataUrl(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = () => typeof reader.result === 'string' ? resolve(reader.result) : reject(new Error('Unable to read image.'));
-    reader.onerror = () => reject(new Error('Unable to read image.'));
+    reader.onload = () => typeof reader.result === 'string' ? resolve(reader.result) : reject(new Error('Unable to read file.'));
+    reader.onerror = () => reject(new Error('Unable to read file.'));
     reader.readAsDataURL(file);
   });
 }
@@ -95,8 +95,16 @@ export default function AdminPage() {
     try {
       await api.put('/api/site-assets?key=' + encodeURIComponent(unlockedKey), { key: assetKey, dataUrl });
       setAssets((current) => ({ ...current, [assetKey]: dataUrl }));
+      if (assetKey === 'logo') {
+        try {
+          if (dataUrl) window.localStorage.setItem('amanicode.uploaded-logo', dataUrl);
+          else window.localStorage.removeItem('amanicode.uploaded-logo');
+        } catch {
+          // The uploaded logo is still saved remotely when browser storage is unavailable.
+        }
+      }
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : 'Could not save the logo.');
+      setError(requestError instanceof Error ? requestError.message : 'Could not save the asset.');
     } finally {
       setSavingAsset('');
     }
@@ -104,16 +112,20 @@ export default function AdminPage() {
 
   async function uploadAsset(assetKey: string, file?: File) {
     if (!file) return;
-    if (!file.type.startsWith('image/') || file.size > 750_000) {
-      setError('Use an image file smaller than 750 KB.');
+    const isHeroMedia = assetKey === 'heroMedia';
+    const isSupportedImage = ['image/png', 'image/jpeg', 'image/webp', 'image/gif'].includes(file.type);
+    const isSupportedVideo = ['video/mp4', 'video/webm'].includes(file.type);
+    const maxSize = isHeroMedia ? 2_500_000 : 750_000;
+    if ((!isSupportedImage && !(isHeroMedia && isSupportedVideo)) || file.size > maxSize) {
+      setError(isHeroMedia ? 'Choose a JPG, PNG, WebP, GIF, MP4 or WebM file smaller than 2.5 MB.' : 'Use a PNG, JPEG, WebP or GIF image smaller than 750 KB.');
       return;
     }
     try {
-      const dataUrl = await readImage(file);
+      const dataUrl = await readFileAsDataUrl(file);
       setAssets((current) => ({ ...current, [assetKey]: dataUrl }));
       await saveAsset(assetKey, dataUrl);
     } catch {
-      setError('Could not read that image.');
+      setError('Could not read that file.');
     }
   }
 
@@ -256,7 +268,8 @@ export default function AdminPage() {
           </div>
         ) : activeView === 'assets' ? (
           <div>
-            <p className="mb-6 text-sm text-slate-400">Upload your company logo. It appears in the public website navigation immediately after saving.</p>
+            <p className="mb-6 text-sm text-slate-400">Manage the company logo and public-site background. Uploaded photos and videos stay fixed behind the full public page template after saving.</p>
+            <div className="grid gap-5 lg:grid-cols-2">
             <div className="max-w-sm rounded-xl border border-white/10 bg-white/5 p-4">
               <div className="aspect-square overflow-hidden rounded-lg bg-[#080c17] flex items-center justify-center">
                 {assets.logo ? <img src={assets.logo} alt="Company Logo" className="h-full w-full object-contain" /> : <ImagePlus className="h-7 w-7 text-slate-600" />}
@@ -269,6 +282,21 @@ export default function AdminPage() {
                 </label>
                 {assets.logo && <button onClick={() => saveAsset('logo', '')} disabled={savingAsset === 'logo'} className="rounded-lg border border-white/10 p-2 text-slate-400 hover:text-red-400" aria-label="Remove company logo"><Trash2 className="h-4 w-4" /></button>}
               </div>
+            </div>
+            <div className="max-w-xl rounded-xl border border-white/10 bg-white/5 p-4">
+              <div className="aspect-video overflow-hidden rounded-lg bg-[#080c17] flex items-center justify-center">
+                {assets.heroMedia?.startsWith('data:video/') ? <video src={assets.heroMedia} controls muted playsInline className="h-full w-full object-cover" /> : assets.heroMedia ? <img src={assets.heroMedia} alt="Homepage hero background preview" className="h-full w-full object-cover" /> : <ImagePlus className="h-7 w-7 text-slate-600" />}
+              </div>
+              <p className="mt-3 text-sm font-medium text-white">Homepage Hero Photo or Video</p>
+              <p className="mt-1 text-xs text-slate-400">Upload JPG, PNG, WebP, GIF, MP4 or WebM (max 2.5 MB).</p>
+              <div className="mt-3 flex items-center gap-2">
+                <label className="cursor-pointer rounded-lg bg-blue-600 px-3 py-2 text-xs font-medium text-white hover:bg-blue-500">
+                  {savingAsset === 'heroMedia' ? 'Saving...' : 'Upload Photo or Video'}
+                  <input type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm" className="sr-only" disabled={savingAsset === 'heroMedia'} onChange={(e) => uploadAsset('heroMedia', e.target.files?.[0])} />
+                </label>
+                {assets.heroMedia && <button onClick={() => saveAsset('heroMedia', '')} disabled={savingAsset === 'heroMedia'} className="rounded-lg border border-white/10 p-2 text-slate-400 hover:text-red-400" aria-label="Remove homepage hero media"><Trash2 className="h-4 w-4" /></button>}
+              </div>
+            </div>
             </div>
           </div>
         ) : <div className="overflow-x-auto rounded-2xl border border-white/10">

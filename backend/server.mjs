@@ -5,8 +5,9 @@ import { neon } from '@neondatabase/serverless';
 const port = Number(process.env.PORT || 3002);
 const adminKey = process.env.ADMIN_KEY;
 const databaseUrl = process.env.DATABASE_URL;
-const assetKeys = new Set(['logo']);
+const assetKeys = new Set(['logo', 'heroMedia']);
 const imageDataUrl = /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/;
+const mediaDataUrl = /^data:(image\/(png|jpeg|webp|gif)|video\/(mp4|webm));base64,[A-Za-z0-9+/=]+$/;
 
 if (!databaseUrl || !adminKey) {
   const missing = [!databaseUrl && 'DATABASE_URL', !adminKey && 'ADMIN_KEY'].filter(Boolean).join(' and ');
@@ -66,7 +67,9 @@ const server = createServer(async (request, response) => {
       if (!isAdmin(requestUrl, request)) return send(response, 401, { error: 'Unauthorized' });
       const { key, dataUrl = '' } = await readBody(request);
       if (!assetKeys.has(key)) return send(response, 400, { error: 'Unknown asset.' });
-      if (dataUrl && (!imageDataUrl.test(dataUrl) || dataUrl.length > 1_000_000)) return send(response, 400, { error: 'Use a supported image under 750 KB.' });
+      const validDataUrl = key === 'logo' ? imageDataUrl.test(dataUrl) : mediaDataUrl.test(dataUrl);
+      const maxDataLength = key === 'heroMedia' ? 3_600_000 : 1_000_000;
+      if (dataUrl && (!validDataUrl || dataUrl.length > maxDataLength)) return send(response, 400, { error: key === 'heroMedia' ? 'Use a supported photo or video under 2.5 MB.' : 'Use a supported image under 750 KB.' });
       await saveRecord('site-assets', key, { key, dataUrl });
       return send(response, 200, { key, dataUrl });
     }

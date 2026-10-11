@@ -1,14 +1,14 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { api } from './api';
 import {
-  Menu, X, ArrowRight, ChevronRight, CheckCircle2, Building2, CreditCard, Users, Package,
-  ShoppingCart, BarChart3, MessageCircle, Phone, Mail, MapPin, Smartphone,
+  Menu, X, ArrowRight, ChevronRight, CheckCircle2, CreditCard, Users,
+  ShoppingCart, BarChart3, MessageCircle, Phone, Mail, MapPin,
   Globe2,
 } from 'lucide-react';
 import AdminPage from './AdminPage';
 import AnimatedBackground from './components/AnimatedBackground';
 import {
-  solutions, products, industries, processSteps, whyCards, problems, trustBadges,
+  products, industries, whyCards, problems, trustBadges,
   pricingPlans, enquiryOptions, CONTACT_EMAIL, CONTACT_PHONE,
   defaultSiteSettings, type ProductOS, type SiteSettings,
 } from './data';
@@ -34,15 +34,13 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
     };
   }, []);
   const links: [string, string][] = [
-    ['Home', '#/home'], ['Solutions', '#/solutions'], ['Products', '#/products'], ['Pricing', '#/pricing'],
-    ['About', '#/about'],
-    ['Resources', '#/resources'], ['Contact', '#/contact'],
+    ['Home', '#/home'], ['Products', '#/products'], ['Pricing', '#/pricing'], ['Contact', '#/contact'],
   ];
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-sm">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-8 py-2">
         <a href="#/home" className="flex items-center gap-3 font-semibold text-[#071a3d] text-xl tracking-tight" aria-label="AmaniCode Solutions home">
-          {logoUrl ? <img src={logoUrl} alt="AmaniCode Solutions" className="brand-logo" /> : <>AmaniCode <span className="text-blue-700 font-normal hidden sm:inline">Solutions</span></>}
+          {logoUrl && <img src={logoUrl} alt="AmaniCode Solutions" className="brand-logo" />}
         </a>
         <div className="hidden lg:flex items-center gap-1 text-sm font-semibold text-[#071a3d]">
           {links.map(([label, href]) => (
@@ -72,10 +70,10 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
 
 function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden pt-36 pb-24 grid-bg">
-      <div className="absolute inset-0 glow pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 relative">
-        <div className="max-w-3xl">
+    <section id="home" className="hero-cinematic relative overflow-hidden pt-36 pb-24">
+      <div className="absolute inset-0 glow pointer-events-none hero-media-glow" />
+      <div className="hero-layout max-w-7xl mx-auto px-5 sm:px-8 relative z-10">
+        <div className="hero-copy-cycle max-w-3xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-xs font-medium text-blue-300 animate-fade-up">
             Built for African businesses
           </span>
@@ -86,12 +84,28 @@ function Hero() {
             AmaniCode Solutions builds powerful business software that helps organizations manage operations, serve customers, increase efficiency and grow with confidence.
           </p>
           <div className="mt-9 flex flex-wrap gap-4 animate-fade-up">
-            <a href="#/solutions" className="rounded-full bg-yellow-400 text-[#071a3d] px-6 py-3 text-sm font-semibold hover:bg-yellow-300 transition-colors">Explore Solutions</a>
+            <a href="#/products" className="rounded-full bg-yellow-400 text-[#071a3d] px-6 py-3 text-sm font-semibold hover:bg-yellow-300 transition-colors">Explore Products</a>
             <a href="#/contact" className="rounded-full border border-white/20 text-white px-6 py-3 text-sm font-semibold hover:border-white/40 transition-colors inline-flex items-center gap-2">Book a Demo <ArrowRight className="h-4 w-4" /></a>
           </div>
           <p className="mt-6 text-xs uppercase tracking-widest text-slate-500">Kenya &bull; Africa &bull; Global</p>
         </div>
-
+        <div className="hero-motion-art" aria-hidden="true">
+          <div className="hero-motion-glow" />
+          <svg viewBox="0 0 680 500" role="presentation">
+            <defs>
+              <linearGradient id="heroWaveA" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stopColor="#4cc9ff" stopOpacity="0.08" /><stop offset="0.5" stopColor="#2584ff" stopOpacity="0.92" /><stop offset="1" stopColor="#9b7bff" stopOpacity="0.18" /></linearGradient>
+              <linearGradient id="heroWaveB" x1="0" x2="1" y1="1" y2="0"><stop offset="0" stopColor="#275bff" stopOpacity="0.16" /><stop offset="0.55" stopColor="#6be4ff" stopOpacity="0.8" /><stop offset="1" stopColor="#5169ff" stopOpacity="0.1" /></linearGradient>
+              <filter id="heroWaveGlow"><feGaussianBlur stdDeviation="7" /></filter>
+            </defs>
+            <circle cx="365" cy="245" r="160" fill="#276bff" opacity="0.09" />
+            <path className="hero-wave hero-wave-blur" d="M18 332 C132 138 204 440 322 264 S502 76 662 183" stroke="url(#heroWaveA)" />
+            <path className="hero-wave hero-wave-one" d="M18 332 C132 138 204 440 322 264 S502 76 662 183" stroke="url(#heroWaveA)" />
+            <path className="hero-wave hero-wave-two" d="M5 212 C138 367 213 59 350 218 S535 411 676 259" stroke="url(#heroWaveB)" />
+            <path className="hero-wave hero-wave-three" d="M27 397 C156 271 237 391 355 296 S532 190 655 307" stroke="#8b9fff" />
+            <circle className="hero-wave-node" cx="322" cy="264" r="5" />
+            <circle className="hero-wave-node hero-wave-node-two" cx="502" cy="76" r="4" />
+          </svg>
+        </div>
       </div>
     </section>
   );
@@ -135,34 +149,9 @@ function ProblemSection() {
   );
 }
 
-const solutionIcons = [Building2, CreditCard, Users, Package, ShoppingCart, BarChart3, Package, Smartphone];
-
-function SolutionsSection({ items = solutions }: { items?: typeof solutions }) {
-  return (
-    <section id="solutions" className="solutions-section py-16 sm:py-24 border-t border-blue-100">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <SectionHeading eyebrow="Solutions" title="Business capabilities that work together." sub="Choose the capability your organization needs, then explore our existing products for live systems." />
-        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {items.map((solution, index) => {
-            const Icon = solutionIcons[index % solutionIcons.length];
-            return (
-              <a key={solution.title} href={solution.link || '#/contact'} className="solution-card group min-h-56 border-b border-blue-100 py-6 hover:border-yellow-400 transition-colors">
-                <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-700 group-hover:bg-yellow-100 transition-colors"><Icon className="h-5 w-5" /></div>
-                <h3 className="mt-5 text-xl font-semibold text-[#071a3d]">{solution.title}</h3>
-                <p className="mt-2 text-[15px] leading-6 text-slate-600">{solution.desc}</p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-blue-700">Learn more <ArrowRight className="h-4 w-4" /></span>
-              </a>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function ProductsSection({ projects = products }: { projects?: ProductOS[] }) {
   return (
-    <section id="products" className="py-24 border-t border-blue-100 bg-white">
+    <section id="products" className="products-page py-24 border-t border-blue-100 bg-white">
       <div className="max-w-[100rem] mx-auto px-5 sm:px-8">
         <SectionHeading eyebrow="Products" title="Our existing digital systems." sub="Each product below is a live AmaniCode project. Select any dashboard to open it in a new tab, then return here whenever you are ready." />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -193,7 +182,7 @@ function PricingSection() {
   const [activePlan, setActivePlan] = useState(1);
 
   return (
-    <section id="pricing" className="py-24 border-t border-blue-100 bg-white">
+    <section id="pricing" className="pricing-page py-24 border-t border-blue-100 bg-white">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <SectionHeading eyebrow="Investment plans" title="Web development packages" sub="Transparent pricing for every stage of your business. No hidden fees." />
         <div className="mt-12 grid lg:grid-cols-3 gap-6 items-start">
@@ -316,65 +305,6 @@ function VisionSection() {
   );
 }
 
-function ProcessSection() {
-  return (
-    <section className="py-24 border-t border-white/5 bg-white/5">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <SectionHeading eyebrow="Process" title="From idea to a system your team relies on." />
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
-          {processSteps.map((s) => (
-            <div key={s.num} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <span className="text-3xl font-semibold text-blue-500/40">{s.num}</span>
-              <h3 className="mt-3 font-medium text-white">{s.title}</h3>
-              <p className="mt-2 text-sm text-slate-400">{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AboutSection() {
-  const values = ['Innovation', 'Integrity', 'Simplicity', 'Impact', 'Customer Success', 'African Excellence'];
-  return (
-    <section id="about" className="py-24 border-t border-white/5">
-      <div className="max-w-4xl mx-auto px-5 sm:px-8">
-        <div>
-          <SectionHeading eyebrow="About AmaniCode" title="We build technology with purpose." sub="AmaniCode Solutions is a Kenyan technology company focused on building practical digital solutions for businesses and organizations. Our mission is to make powerful technology accessible to businesses across Africa." />
-          <div className="mt-8 space-y-4">
-            <div className="rounded-xl border border-white/10 bg-white/5 p-5">
-              <p className="text-xs uppercase tracking-widest text-blue-400">Vision</p>
-              <p className="mt-1.5 text-slate-200">To become one of Africa's most trusted technology companies.</p>
-            </div>
-            <div className="rounded-xl border border-white/10 bg-white/5 p-5">
-              <p className="text-xs uppercase tracking-widest text-blue-400">Mission</p>
-              <p className="mt-1.5 text-slate-200">To empower African businesses through intelligent, accessible and scalable technology.</p>
-            </div>
-          </div>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {values.map((v) => <span key={v} className="text-xs rounded-full border border-white/10 px-3 py-1.5 text-slate-300">{v}</span>)}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ResourcesSection() {
-  const cats = ['Business Technology', 'Digital Transformation', 'Entrepreneurship', 'POS', 'E-commerce', 'Artificial Intelligence', 'Cybersecurity', 'African Technology', 'Business Management'];
-  return (
-    <section id="resources" className="py-24 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <SectionHeading eyebrow="Resources" title="Insights on African business technology." sub="Our resource centre is launching soon, covering the topics below." />
-        <div className="mt-10 flex flex-wrap gap-2.5">
-          {cats.map((c) => <span key={c} className="text-sm rounded-full border border-white/10 px-4 py-2 text-slate-300">{c}</span>)}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 interface ContactForm {
   name: string; business: string; email: string; phone: string; country: string;
   industry: string; interest: string; budget: string; message: string;
@@ -410,7 +340,7 @@ function ContactSection({ whatsappNumber = CONTACT_PHONE, contactEmail = CONTACT
   const inputClass = 'w-full rounded-lg bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500/60';
 
   return (
-    <section id="contact" className="py-24 border-t border-white/5 bg-white/5">
+    <section id="contact" className="contact-page py-24 border-t border-white/5 bg-white/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14">
         <div>
           <SectionHeading eyebrow="Contact" title="Let's build something that moves your business forward." />
@@ -465,7 +395,7 @@ function Footer() {
     { title: 'Solutions', items: products.map((p) => p.name) },
     { title: 'Products', items: products.map((p) => p.name) },
     { title: 'Industries', items: industries.slice(0, 6).map((i) => i.name) },
-    { title: 'Company', items: ['About', 'Careers', 'Contact'] },
+    { title: 'Company', items: ['Contact'] },
   ];
   return (
     <footer className="border-t border-white/5 pt-16 pb-8">
@@ -513,10 +443,28 @@ function WhatsAppButton({ whatsappNumber }: { whatsappNumber: string }) {
 }
 
 function LandingPage({ page }: { page: string }) {
-  const [assets, setAssets] = useState<Record<string, string>>({});
+  const backgroundVideoPages = ['home', 'products', 'pricing', 'contact'];
+  const usePageBackground = backgroundVideoPages.includes(page);
+  const [assets, setAssets] = useState<Record<string, string>>(() => {
+    try {
+      const cachedLogo = window.localStorage.getItem('amanicode.uploaded-logo');
+      return cachedLogo ? { logo: cachedLogo } : {};
+    } catch {
+      return {};
+    }
+  });
   const [settings, setSettings] = useState<SiteSettings>(defaultSiteSettings);
   useEffect(() => {
-    api.get('/api/site-assets').then((res) => setAssets(res.data.assets || {})).catch(() => undefined);
+    api.get('/api/site-assets').then((res) => {
+      const loadedAssets = res.data.assets || {};
+      setAssets(loadedAssets);
+      try {
+        if (loadedAssets.logo) window.localStorage.setItem('amanicode.uploaded-logo', loadedAssets.logo);
+        else window.localStorage.removeItem('amanicode.uploaded-logo');
+      } catch {
+        // The remote asset remains available when browser storage is unavailable.
+      }
+    }).catch(() => undefined);
     api.get('/api/site-settings').then((res) => {
       if (!res.data.settings) return;
       const savedProjects = Array.isArray(res.data.settings.projects) ? res.data.settings.projects : [];
@@ -529,18 +477,18 @@ function LandingPage({ page }: { page: string }) {
     }).catch(() => undefined);
   }, []);
   return (
-    <div className="public-site min-h-screen bg-white relative">
-      <AnimatedBackground />
+    <div className={'public-site min-h-screen bg-white relative' + (assets.heroMedia && usePageBackground ? ' has-page-background' : '')}>
+      {assets.heroMedia && usePageBackground ? <div className="site-background-media" aria-hidden="true">
+        {assets.heroMedia.startsWith('data:video/') ? <video src={assets.heroMedia} autoPlay muted loop playsInline /> : <img src={assets.heroMedia} alt="" />}
+        <div />
+      </div> : <AnimatedBackground />}
       <div className="relative z-10">
         <Navbar logoUrl={assets.logo} />
         {page === 'home' && <><Hero /><TrustStrip /><ProblemSection /><FeatureShowcase /></>}
-          {page === 'solutions' && <SolutionsSection items={settings.solutions} />}
           {page === 'products' && <ProductsSection projects={settings.projects} />}
           {page === 'pricing' && <PricingSection />}
         {page === 'industries' && <IndustriesSection />}
         {page === 'why' && <><WhySection /><VisionSection /></>}
-        {page === 'about' && <><AboutSection /><ProcessSection /></>}
-        {page === 'resources' && <ResourcesSection />}
         {page === 'contact' && <ContactSection whatsappNumber={settings.whatsappNumber} contactEmail={settings.contactEmail} />}
         <Footer />
         <WhatsAppButton whatsappNumber={settings.whatsappNumber} />
@@ -558,7 +506,7 @@ function App() {
   }, []);
   if (hash.startsWith('#/admin')) return <AdminPage />;
   const page = hash.startsWith('#/') ? hash.slice(2) : 'home';
-  const publicPages = ['home', 'solutions', 'products', 'pricing', 'industries', 'why', 'about', 'resources', 'contact'];
+  const publicPages = ['home', 'products', 'pricing', 'industries', 'why', 'contact'];
   return <LandingPage page={publicPages.includes(page) ? page : 'home'} />;
 }
 
