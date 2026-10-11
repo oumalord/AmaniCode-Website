@@ -99,7 +99,7 @@ body {
 @keyframes waveFlow { to { stroke-dashoffset: -228px; } }
 @keyframes heroGlow { from { opacity: .48; transform: scale(.84); } to { opacity: 1; transform: scale(1.14); } }
 @keyframes nodePulse { 0%,100% { opacity: .35; r: 3px; } 50% { opacity: 1; r: 6px; } }
-@keyframes heroCopyCycle { 0%, 8% { opacity: 0; transform: translateY(14px); } 18%, 77% { opacity: 1; transform: translateY(0); } 90%, 100% { opacity: 0; transform: translateY(-10px); } }
+@keyframes heroCopyCycle { 0%, 100% { opacity: .68; transform: translateY(0); } 24%, 48% { opacity: 1; transform: translateY(0); } 74% { opacity: .74; transform: translateY(0); } }
 
 @media (max-width: 768px) {
   .hero-cinematic { min-height: 0; display: block; padding-top: 7.5rem; }
@@ -121,7 +121,7 @@ body {
   transform-origin: left center;
 }
 
-.site-navbar { background-color: #071a3d !important; border-color: rgba(148, 183, 235, .22) !important; }
+.site-navbar { background-color: #071a3d !important; border-color: transparent !important; border-bottom: 0 !important; box-shadow: none !important; }
 .site-navbar nav > a:first-child { overflow: visible; }
 .site-navbar nav a { color: #f8fafc; }
 .site-navbar nav a:hover { color: #ffffff; }
