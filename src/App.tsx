@@ -131,7 +131,7 @@ function TrustStrip() {
 
 function ProblemSection() {
   return (
-    <section className="py-24">
+    <section className="problem-section py-12">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="max-w-2xl">
           <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">Across every field, technology can open new possibilities.</h2>
@@ -143,7 +143,7 @@ function ProblemSection() {
             </div>
           ))}
         </div>
-        <p className="mt-10 text-xl sm:text-2xl font-medium text-blue-400">AmaniCode builds technology around the people and challenges that matter.</p>
+        <p className="mt-5 text-xl sm:text-2xl font-medium text-blue-400">AmaniCode builds technology around the people and challenges that matter.</p>
       </div>
     </section>
   );
@@ -244,7 +244,7 @@ function FeatureShowcase() {
     { title: 'Build inclusive finance', desc: 'Create secure digital financial services for people and communities.', items: ['Digital payments', 'Financial access', 'Transaction insights', 'Secure platforms'], Icon: ShoppingCart },
   ];
   return (
-    <section className="py-24 border-t border-white/5 bg-white/5">
+    <section className="feature-showcase border-t border-white/5 bg-white/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 space-y-16">
         {blocks.map((b, i) => (
           <div key={b.title} className={'grid lg:grid-cols-2 gap-10 items-center ' + (i % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : '')}>
@@ -258,9 +258,15 @@ function FeatureShowcase() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-[#0b2f6b] p-6 h-64 flex items-center justify-center text-slate-300 text-sm">
-              Interface preview
-            </div>
+            {i === 1 ? (
+              <div className="learning-preview rounded-2xl border border-white/10 bg-[#0b2f6b]">
+                <iframe src="https://www.kenyagirlguidesassociationlms.co.ke/" title="Kenya Girl Guides Association LMS learning platform preview" loading="lazy" />
+              </div>
+            ) : (
+              <div className="rounded-2xl border border-white/10 bg-[#0b2f6b] p-6 h-64 flex items-center justify-center text-slate-300 text-sm">
+                Interface preview
+              </div>
+            )}
           </div>
         ))}
       </div>

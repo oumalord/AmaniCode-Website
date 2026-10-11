@@ -143,6 +143,11 @@ body {
   background: #ffffff;
 }
 
+.problem-section { padding-bottom: 1.5rem; }
+.feature-showcase { padding: 1.5rem 0 5rem; }
+.learning-preview { height: 18rem; overflow: hidden; position: relative; }
+.learning-preview iframe { position: absolute; top: 0; left: 0; width: 200%; height: 200%; border: 0; background: #09152d; transform: scale(.5); transform-origin: top left; }
+
 @media (max-width: 639px) {
   .public-site .fixed.inset-0.z-0 {
     opacity: 0.16;
