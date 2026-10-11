@@ -113,13 +113,23 @@ body {
 }
 
 .brand-logo {
-  width: clamp(7.5rem, 13vw, 10rem);
-  height: 4.75rem;
+  width: clamp(11rem, 15vw, 13rem);
+  height: clamp(6rem, 7vw, 7rem);
   object-fit: contain;
-  filter: drop-shadow(0 4px 10px rgba(14, 165, 233, 0.35));
-  transform: scale(1.08);
+  filter: brightness(1.28) contrast(1.22) saturate(1.35) drop-shadow(0 3px 10px rgba(255, 255, 255, 0.3));
+  transform: scale(1.65);
   transform-origin: left center;
 }
+
+.site-navbar { background-color: #071a3d !important; border-color: rgba(148, 183, 235, .22) !important; }
+.site-navbar nav > a:first-child { overflow: visible; }
+.site-navbar nav a { color: #f8fafc; }
+.site-navbar nav a:hover { color: #ffffff; }
+.site-navbar nav a.bg-yellow-400 { color: #071a3d; }
+.site-navbar nav > button { color: #ffffff; }
+.site-navbar .site-mobile-menu { background-color: #071a3d !important; border-color: rgba(148, 183, 235, .22) !important; }
+.site-navbar .site-mobile-menu a { color: #f8fafc; }
+.site-navbar .site-mobile-menu a.bg-yellow-400 { color: #071a3d; }
 
 .dashboard-preview {
   aspect-ratio: 16 / 10;

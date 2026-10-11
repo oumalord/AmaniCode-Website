@@ -37,7 +37,7 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
     ['Home', '#/home'], ['Products', '#/products'], ['Pricing', '#/pricing'], ['Contact', '#/contact'],
   ];
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-sm">
+    <header className="site-navbar fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-sm">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-8 py-2">
         <a href="#/home" className="flex items-center gap-3 font-semibold text-[#071a3d] text-xl tracking-tight" aria-label="AmaniCode Solutions home">
           {logoUrl && <img src={logoUrl} alt="AmaniCode Solutions" className="brand-logo" />}
@@ -57,7 +57,7 @@ function Navbar({ logoUrl }: { logoUrl?: string }) {
         </button>
       </nav>
       {open && (
-        <div className="lg:hidden bg-white border-t border-blue-100 px-5 py-4 flex flex-col gap-2 shadow-lg">
+        <div className="site-mobile-menu lg:hidden bg-white border-t border-blue-100 px-5 py-4 flex flex-col gap-2 shadow-lg">
           {links.map(([label, href]) => (
             <a key={href} href={href} onClick={() => setOpen(false)} className={'rounded-lg px-3 py-2 text-sm font-semibold ' + (activeHref === href ? 'bg-yellow-400 text-[#071a3d]' : 'text-[#071a3d] hover:bg-blue-50')}>{label}</a>
           ))}
