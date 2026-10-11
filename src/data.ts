@@ -4,14 +4,14 @@ export const CONTACT_PHONE = '+254 700 000 000'; // TODO: replace with real phon
 
 export interface Solution { title: string; desc: string; link?: string; }
 export const solutions: Solution[] = [
-  { title: 'Business Management Systems', desc: 'Run your entire business from one intelligent platform.' },
-  { title: 'POS Systems', desc: 'Fast, reliable point-of-sale systems designed for African businesses.' },
-  { title: 'CRM', desc: 'Build stronger customer relationships with powerful customer management.' },
-  { title: 'Inventory', desc: 'Know exactly what you have, what is selling and what needs replenishing.' },
-  { title: 'E-Commerce', desc: 'Take your business online and sell 24/7.' },
-  { title: 'Business Analytics', desc: 'Turn business data into decisions.' },
-  { title: 'Custom Software', desc: 'Build software around the exact way your organization operates.' },
-  { title: 'Mobile Applications', desc: 'Create powerful mobile experiences for customers, staff and organizations.' },
+  { title: 'Healthcare & Medical Systems', desc: 'Digital tools for care delivery, health monitoring, medical research and community health.' },
+  { title: 'Education & LMS', desc: 'Learning platforms that connect educators, learners, courses and progress.' },
+  { title: 'AgriTech & Food Systems', desc: 'Technology for agriculture, food production, markets and the communities they support.' },
+  { title: 'FinTech & Digital Payments', desc: 'Secure financial services and payment experiences designed for wider access.' },
+  { title: 'Public & Civic Technology', desc: 'Useful digital services that help public institutions serve people better.' },
+  { title: 'Research & Data Platforms', desc: 'Collect, understand and share information to support better decisions and discovery.' },
+  { title: 'Custom Software', desc: 'Purpose-built software for the unique challenges of any organization or field.' },
+  { title: 'Mobile Applications', desc: 'Accessible mobile experiences for people, teams and communities.' },
 ];
 
 export interface ProductOS { id: string; name: string; forWho: string[]; features: string[]; link?: string; }
@@ -44,9 +44,12 @@ export const industries: Industry[] = [
   { name: 'Fashion', desc: 'Boutiques and clothing stores managing size, colour and seasonal stock.', recommended: 'AmaniFashion OS', features: ['Variant inventory', 'Loyalty', 'E-commerce'] },
   { name: 'Beauty', desc: 'Salons, barbers and spas coordinating appointments, staff and commissions.', recommended: 'SafiGroom OS', features: ['Appointments', 'Staff', 'Commissions'] },
   { name: 'Hospitality', desc: 'Hotels, guesthouses and restaurants managing bookings and service.', recommended: 'Custom Business OS', features: ['Bookings', 'Billing', 'Staff'] },
-  { name: 'Healthcare', desc: 'Clinics and pharmacies handling patient records and stock.', recommended: 'Custom Business OS', features: ['Records', 'Inventory', 'Billing'] },
-  { name: 'Education', desc: 'Schools and training centres managing students and payments.', recommended: 'Custom Business OS', features: ['Enrolment', 'Fees', 'Reports'] },
-  { name: 'Agriculture', desc: 'Agribusinesses tracking produce, suppliers and sales.', recommended: 'Custom Business OS', features: ['Produce tracking', 'Suppliers', 'Sales'] },
+  { name: 'Healthcare & Medical Research', desc: 'Care providers, public health teams and researchers working with health information and services.', recommended: 'Health & Research Platforms', features: ['Patient services', 'Health data', 'Monitoring', 'Research'] },
+  { name: 'Education & Learning', desc: 'Schools, training centres and learning organizations connecting educators and learners.', recommended: 'Education & LMS', features: ['Learning platforms', 'Courses', 'Progress', 'Digital resources'] },
+  { name: 'Agriculture & Food Systems', desc: 'Farmers, researchers and food-system organizations connecting production, knowledge and markets.', recommended: 'AgriTech Platforms', features: ['Crop insights', 'Produce tracking', 'Market access', 'Climate data'] },
+  { name: 'Finance & FinTech', desc: 'Financial institutions and innovators creating secure, inclusive digital financial services.', recommended: 'FinTech & Payments', features: ['Digital payments', 'Financial access', 'Transactions', 'Security'] },
+  { name: 'Public Sector & Civic Services', desc: 'Public institutions and communities improving access to essential information and services.', recommended: 'Civic Technology', features: ['Digital services', 'Public information', 'Community access', 'Data'] },
+  { name: 'Research & Nonprofits', desc: 'Research teams and mission-led organizations delivering programs and sharing evidence.', recommended: 'Research & Data Platforms', features: ['Research data', 'Programs', 'Monitoring', 'Reporting'] },
   { name: 'Professional Services', desc: 'Consultancies and agencies managing clients and billing.', recommended: 'CRM + Billing', features: ['Clients', 'Invoicing', 'Projects'] },
   { name: 'Property', desc: 'Property managers tracking units, tenants and payments.', recommended: 'Custom Business OS', features: ['Units', 'Tenants', 'Payments'] },
   { name: 'Restaurants', desc: 'Restaurants and cafes managing orders, tables and kitchen flow.', recommended: 'Custom Business OS', features: ['POS', 'Orders', 'Inventory'] },
@@ -66,25 +69,25 @@ export const processSteps: ProcessStep[] = [
 
 export interface WhyCard { title: string; desc: string; }
 export const whyCards: WhyCard[] = [
-  { title: 'Built for Africa', desc: 'We understand the realities of African businesses.' },
-  { title: 'Simple', desc: 'Powerful software without unnecessary complexity.' },
-  { title: 'Scalable', desc: 'Start small and grow without replacing your system.' },
-  { title: 'Connected', desc: 'Payments, customers, inventory and operations work together.' },
-  { title: 'Affordable', desc: 'Enterprise-grade technology designed with growing businesses in mind.' },
-  { title: 'Human Support', desc: 'Real people who understand your business.' },
+  { title: 'Built for Africa', desc: 'We understand the people, communities and realities shaping African technology.' },
+  { title: 'Human-centred', desc: 'Useful digital experiences designed around the people who rely on them.' },
+  { title: 'Scalable', desc: 'Start with a focused solution and expand as needs and impact grow.' },
+  { title: 'Connected', desc: 'Bring services, information and people together across systems.' },
+  { title: 'Accessible', desc: 'Make digital tools easier to reach and use in diverse contexts.' },
+  { title: 'Collaborative', desc: 'Work with teams and communities to solve challenges that matter.' },
 ];
 
 export const problems: string[] = [
-  'Manual record keeping',
-  'Lost sales',
-  'Poor inventory visibility',
-  'Scattered customer information',
-  'Difficult payment reconciliation',
-  'No reliable business reports',
-  'Staff accountability problems',
-  'Limited online presence',
-  'Poor customer follow-up',
-  'Multiple branches managed separately',
+  'Limited access to essential healthcare',
+  'Learning resources out of reach',
+  'Disconnected health and research data',
+  'Farmers cut off from timely insights',
+  'Barriers to inclusive digital finance',
+  'Public services difficult to access',
+  'Vital information scattered across systems',
+  'Communities underrepresented in digital tools',
+  'Research findings hard to put into practice',
+  'Local solutions need room to scale',
 ];
 
 export const trustBadges: string[] = ['M-Pesa Ready', 'Mobile First', 'Cloud Based', 'Multi-Branch', 'Secure', 'Scalable', 'Real-Time Analytics', 'WhatsApp Ready'];
@@ -97,13 +100,14 @@ export const pricingPlans: PricingPlan[] = [
 ];
 
 export const enquiryOptions: string[] = [
-  'I need a business system',
-  'I need a website',
-  'I need an e-commerce platform',
-  'I need a POS',
-  'I need a mobile app',
-  'I need custom software',
-  'I want a demo',
-  'I want a partnership',
-  'Other',
+  'Healthcare or medical technology',
+  'Education, e-learning or LMS',
+  'Agriculture or food systems',
+  'FinTech or digital payments',
+  'Public or civic technology',
+  'Research, data or AI',
+  'Custom software or digital platform',
+  'Website or mobile application',
+  'Partnership or collaboration',
+  'Other field or idea',
 ];

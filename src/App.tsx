@@ -75,16 +75,16 @@ function Hero() {
       <div className="hero-layout max-w-7xl mx-auto px-5 sm:px-8 relative z-10">
         <div className="hero-copy-cycle max-w-3xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-xs font-medium text-blue-300 animate-fade-up">
-            Built for African businesses
+            African technology, built for every field
           </span>
           <h1 className="mt-6 text-4xl sm:text-6xl font-semibold tracking-tight text-white leading-[1.08] animate-fade-up">
-            Technology that helps African businesses grow.
+            Building technology for Africa's next chapter.
           </h1>
           <p className="mt-6 text-lg text-slate-400 max-w-xl animate-fade-up">
-            AmaniCode Solutions builds powerful business software that helps organizations manage operations, serve customers, increase efficiency and grow with confidence.
+            We design and build software for the challenges and opportunities shaping every field—from healthcare and medical research to education and LMS, agriculture and food systems, fintech, public services and beyond.
           </p>
           <div className="mt-9 flex flex-wrap gap-4 animate-fade-up">
-            <a href="#/products" className="rounded-full bg-yellow-400 text-[#071a3d] px-6 py-3 text-sm font-semibold hover:bg-yellow-300 transition-colors">Explore Products</a>
+            <a href="#/products" className="rounded-full bg-yellow-400 text-[#071a3d] px-6 py-3 text-sm font-semibold hover:bg-yellow-300 transition-colors">Explore Our Work</a>
             <a href="#/contact" className="rounded-full border border-white/20 text-white px-6 py-3 text-sm font-semibold hover:border-white/40 transition-colors inline-flex items-center gap-2">Book a Demo <ArrowRight className="h-4 w-4" /></a>
           </div>
           <p className="mt-6 text-xs uppercase tracking-widest text-slate-500">Kenya &bull; Africa &bull; Global</p>
@@ -115,7 +115,7 @@ function TrustStrip() {
   return (
     <section className="border-y border-white/5 bg-white/5 py-10">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <p className="text-center text-sm text-slate-400 mb-6">Built for the way African businesses actually work.</p>
+        <p className="text-center text-sm text-slate-400 mb-6">Thoughtful technology for Africa's people, communities and industries.</p>
         <div className="flex flex-wrap justify-center gap-3">
           {trustBadges.map((b) => (
             <span key={b} className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3.5 py-1.5 text-xs text-slate-300">
@@ -123,7 +123,7 @@ function TrustStrip() {
             </span>
           ))}
         </div>
-        <p className="mt-8 text-center text-xs text-slate-600">Trusted by businesses across Africa &mdash; client showcase coming soon.</p>
+        <p className="mt-8 text-center text-xs text-slate-600">From local communities to national systems, we build for Africa's real-world needs.</p>
       </div>
     </section>
   );
@@ -134,7 +134,7 @@ function ProblemSection() {
     <section className="py-24">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="max-w-2xl">
-          <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">Running a business shouldn't feel harder than it needs to.</h2>
+          <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">Across every field, technology can open new possibilities.</h2>
         </div>
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {problems.map((p) => (
@@ -143,7 +143,7 @@ function ProblemSection() {
             </div>
           ))}
         </div>
-        <p className="mt-10 text-xl sm:text-2xl font-medium text-blue-400">AmaniCode brings everything together.</p>
+        <p className="mt-10 text-xl sm:text-2xl font-medium text-blue-400">AmaniCode builds technology around the people and challenges that matter.</p>
       </div>
     </section>
   );
@@ -238,10 +238,10 @@ function IndustriesSection() {
 
 function FeatureShowcase() {
   const blocks = [
-    { title: 'Sell faster', desc: 'A fast, reliable point-of-sale built for real checkout counters.', items: ['Fast checkout', 'Barcode scanning', 'M-Pesa, cash & card', 'Digital receipts'], Icon: CreditCard },
-    { title: 'Know your business', desc: 'Turn every transaction into a clear picture of performance.', items: ['Revenue & profit', 'Orders & expenses', 'Customer trends', 'Inventory levels'], Icon: BarChart3 },
-    { title: 'Manage your customers', desc: 'Keep every customer relationship organised and personal.', items: ['Customer profiles', 'Purchase history', 'Loyalty programs', 'Customer segmentation'], Icon: Users },
-    { title: 'Take your business online', desc: 'A modern storefront connected to the rest of your operations.', items: ['Product catalogue', 'Cart & checkout', 'M-Pesa payments', 'Order tracking'], Icon: ShoppingCart },
+    { title: 'Advance health & medical research', desc: 'Support care teams and researchers with connected, useful digital tools.', items: ['Health monitoring', 'Research data', 'Community reporting', 'Care coordination'], Icon: CreditCard },
+    { title: 'Open up learning', desc: 'Make learning accessible and help educators support every learner.', items: ['Learning platforms', 'Courses & resources', 'Learner progress', 'Training management'], Icon: BarChart3 },
+    { title: 'Strengthen agriculture', desc: 'Connect people, information and resources across agricultural systems.', items: ['Farm records', 'Crop monitoring', 'Market connections', 'Climate insights'], Icon: Users },
+    { title: 'Build inclusive finance', desc: 'Create secure digital financial services for people and communities.', items: ['Digital payments', 'Financial access', 'Transaction insights', 'Secure platforms'], Icon: ShoppingCart },
   ];
   return (
     <section className="py-24 border-t border-white/5 bg-white/5">
@@ -272,7 +272,7 @@ function WhySection() {
   return (
     <section id="why" className="py-24 border-t border-white/5 bg-white/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <SectionHeading eyebrow="Why AmaniCode" title="Why businesses choose AmaniCode." />
+        <SectionHeading eyebrow="Why AmaniCode" title="Technology built with Africa in mind." />
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {whyCards.map((c) => (
             <div key={c.title} className="rounded-2xl border border-white/10 bg-white/5 p-6">
@@ -294,7 +294,7 @@ function VisionSection() {
         <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight leading-tight">Africa doesn't just need technology.<br />
           <span className="text-blue-400">Africa needs technology built for Africa.</span>
         </h2>
-        <p className="mt-8 text-slate-400 text-lg">Many African businesses rely on fragmented systems that were designed for different markets and different business realities. AmaniCode Solutions is building a new generation of African business technology &mdash; practical, accessible, intelligent and scalable.</p>
+        <p className="mt-8 text-slate-400 text-lg">Africa's future depends on technology that serves people across every field. AmaniCode Solutions builds practical, accessible and scalable software for healthcare and medical research, education and LMS, agriculture and food systems, fintech, public services, commerce and the many fields shaping African life.</p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           {['Modern', 'Innovative', 'Entrepreneurial', 'Ambitious', 'Connected'].map((w) => (
             <span key={w} className="rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm text-blue-300">{w}</span>
@@ -343,7 +343,7 @@ function ContactSection({ whatsappNumber = CONTACT_PHONE, contactEmail = CONTACT
     <section id="contact" className="contact-page py-24 border-t border-white/5 bg-white/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14">
         <div>
-          <SectionHeading eyebrow="Contact" title="Let's build something that moves your business forward." />
+          <SectionHeading eyebrow="Contact" title="Let's build technology that moves your field forward." />
           <div className="mt-8 space-y-4 text-sm text-slate-300">
             <a href={'https://wa.me/' + whatsappNumber.replace(/\D/g, '')} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white"><Phone className="h-4 w-4 text-blue-400" /> {whatsappNumber}</a>
             <a href={'mailto:' + contactEmail} className="flex items-center gap-3 hover:text-white"><Mail className="h-4 w-4 text-blue-400" /> {contactEmail}</a>
@@ -363,7 +363,7 @@ function ContactSection({ whatsappNumber = CONTACT_PHONE, contactEmail = CONTACT
             <>
               <div className="grid sm:grid-cols-2 gap-4">
                 <input className={inputClass} placeholder="Full name" value={form.name} onChange={(e) => update('name', e.target.value)} />
-                <input className={inputClass} placeholder="Business name" value={form.business} onChange={(e) => update('business', e.target.value)} />
+                <input className={inputClass} placeholder="Organization or project name" value={form.business} onChange={(e) => update('business', e.target.value)} />
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 <input className={inputClass} placeholder="Email" type="email" value={form.email} onChange={(e) => update('email', e.target.value)} />
@@ -392,8 +392,8 @@ function ContactSection({ whatsappNumber = CONTACT_PHONE, contactEmail = CONTACT
 
 function Footer() {
   const cols = [
-    { title: 'Solutions', items: products.map((p) => p.name) },
-    { title: 'Products', items: products.map((p) => p.name) },
+    { title: 'Our work', items: products.map((p) => p.name) },
+    { title: 'Digital platforms', items: ['Healthcare & research', 'Education & LMS', 'AgriTech', 'FinTech'] },
     { title: 'Industries', items: industries.slice(0, 6).map((i) => i.name) },
     { title: 'Company', items: ['Contact'] },
   ];
@@ -403,7 +403,7 @@ function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-1">
             <p className="font-semibold text-white">AmaniCode Solutions</p>
-            <p className="mt-2 text-sm text-slate-500">Technology that helps African businesses grow.</p>
+            <p className="mt-2 text-sm text-slate-500">Building useful technology for Africa's people, fields and future.</p>
             <div className="mt-5 flex gap-3 text-slate-500">
               <Globe2 className="h-4 w-4" />
               <MessageCircle className="h-4 w-4" />
@@ -428,7 +428,7 @@ function Footer() {
 }
 
 function WhatsAppButton({ whatsappNumber }: { whatsappNumber: string }) {
-  const message = encodeURIComponent('Hello AmaniCode Solutions, I would like to learn more about your business software.');
+  const message = encodeURIComponent('Hello AmaniCode Solutions, I would like to discuss a software or technology project.');
   return (
     <a
       href={'https://wa.me/' + whatsappNumber.replace(/\D/g, '') + '?text=' + message}

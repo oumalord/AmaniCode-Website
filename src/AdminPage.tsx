@@ -253,7 +253,7 @@ export default function AdminPage() {
             </div>
             <div>
               <h2 className="text-lg font-semibold text-white">Solutions</h2>
-              <p className="mt-1 text-sm text-slate-400">Enter the homepage URL for each business system. Clicking its public card opens that system.</p>
+              <p className="mt-1 text-sm text-slate-400">Manage software and digital platforms across the fields AmaniCode serves. Clicking a public product card opens its live system.</p>
               <div className="mt-5 space-y-5">
                 {settings.solutions.map((solution, index) => (
                   <div key={solution.title} className="rounded-xl border border-white/10 bg-white/5 p-5 grid gap-4 sm:grid-cols-2">
