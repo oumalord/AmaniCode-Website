@@ -20,7 +20,15 @@ html {
 body {
   background-color: var(--white);
   color: var(--white);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, button, a {
+  font-family: 'Manrope', 'DM Sans', system-ui, sans-serif;
 }
 
 .public-site .text-white { color: var(--blue-950) !important; }
@@ -145,8 +153,8 @@ body {
 
 .problem-section { padding-bottom: 1.5rem; }
 .feature-showcase { padding: 1.5rem 0 5rem; }
-.learning-preview { height: 18rem; overflow: hidden; position: relative; }
-.learning-preview iframe { position: absolute; top: 0; left: 0; width: 200%; height: 200%; border: 0; background: #09152d; transform: scale(.5); transform-origin: top left; }
+.learning-preview { aspect-ratio: 16 / 9; overflow: hidden; position: relative; isolation: isolate; background: #09152d; box-shadow: 0 20px 50px rgba(0, 0, 0, .28); }
+.learning-preview iframe { position: absolute; top: 0; left: 0; width: 238%; height: 250%; border: 0; background: #09152d; transform: scale(.42); transform-origin: top left; pointer-events: none; }
 
 @media (max-width: 639px) {
   .public-site .fixed.inset-0.z-0 {
@@ -229,3 +237,155 @@ body {
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--blue-950); }
 ::-webkit-scrollbar-thumb { background: var(--blue-500); border-radius: 8px; }
+
+@media (max-width: 639px) {
+  html { scroll-padding-top: 5rem; }
+
+  .site-navbar nav {
+    min-height: 4.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .brand-logo {
+    width: 9rem;
+    height: 4rem;
+    transform: none;
+    filter: brightness(1.15) contrast(1.08) saturate(1.15);
+  }
+
+  .site-navbar nav > button {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.75rem;
+  }
+
+  .site-mobile-menu a {
+    min-height: 2.875rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-cinematic {
+    padding-top: 6.5rem;
+    padding-bottom: 3.25rem;
+  }
+
+  .hero-layout {
+    min-height: 0;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-copy-cycle { animation: none; }
+
+  .hero-copy-cycle h1 {
+    max-width: 14ch;
+    margin-top: 1.15rem;
+    font-size: clamp(2.35rem, 9vw, 3.35rem);
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .hero-copy-cycle > p:not(:last-child) {
+    max-width: 34rem;
+    margin-top: 1.15rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .hero-copy-cycle > div {
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .hero-copy-cycle > div a {
+    min-height: 3rem;
+    padding-inline: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-motion-art { opacity: 0.68; }
+  .hero-motion-art svg { width: 125%; }
+
+  .public-site section[id],
+  .public-site section {
+    scroll-margin-top: 5rem;
+  }
+
+  .products-page,
+  .pricing-page,
+  .contact-page,
+  #industries,
+  #why {
+    padding-top: 3.75rem;
+    padding-bottom: 3.75rem;
+  }
+
+  .products-page .mt-12,
+  .pricing-page .mt-12 {
+    margin-top: 2rem;
+  }
+
+  .products-page .group {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .feature-showcase {
+    padding-top: 2.75rem;
+    padding-bottom: 3.75rem;
+  }
+
+  .feature-showcase > div {
+    gap: 3.25rem;
+  }
+
+  .feature-showcase h3,
+  .problem-section h2,
+  .public-site section h2 {
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .feature-showcase p,
+  .problem-section p,
+  .public-site section > div > p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .feature-showcase li,
+  .trust-strip span {
+    font-size: 0.9375rem;
+  }
+
+  .learning-preview { aspect-ratio: 4 / 3; }
+
+  .public-site a,
+  .public-site button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .public-site a:focus-visible,
+  .public-site button:focus-visible,
+  .public-site input:focus-visible,
+  .public-site textarea:focus-visible,
+  .public-site select:focus-visible {
+    outline: 3px solid rgba(40, 120, 232, 0.6);
+    outline-offset: 3px;
+  }
+
+  .public-site .fixed.bottom-5.right-5 {
+    right: 1rem;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}

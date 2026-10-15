@@ -259,8 +259,8 @@ function FeatureShowcase() {
               </ul>
             </div>
             {i === 1 ? (
-              <div className="learning-preview rounded-2xl border border-white/10 bg-[#0b2f6b]">
-                <iframe src="https://www.kenyagirlguidesassociationlms.co.ke/" title="Kenya Girl Guides Association LMS learning platform preview" loading="lazy" />
+              <div className="learning-preview rounded-2xl border border-white/10 bg-[#0b2f6b]" aria-label="Screenshot preview of the Kenya Girl Guides Association LMS homepage">
+                <iframe src="https://www.kenyagirlguidesassociationlms.co.ke/" title="Kenya Girl Guides Association LMS screenshot preview" loading="lazy" scrolling="no" tabIndex={-1} />
               </div>
             ) : (
               <div className="rounded-2xl border border-white/10 bg-[#0b2f6b] p-6 h-64 flex items-center justify-center text-slate-300 text-sm">
